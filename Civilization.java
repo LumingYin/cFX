@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.lang.Math;
 
 public class Civilization {
 static String userName = new String();
@@ -114,10 +115,9 @@ static boolean isFirstRun = true;
         } else {
             resources = resources + 1;
         }
-
         gold = gold + 3 * cachedNumberOfCities;
-        
-        if (resources % 2 == 0) {
+        int roundedResources = (int) Math.round(resources);
+        if (roundedResources % 2 == 0) {
             happiness = happiness + 1;
         } else {
             happiness = happiness - 3;
