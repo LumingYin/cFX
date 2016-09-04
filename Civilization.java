@@ -84,15 +84,23 @@ static boolean isFirstRun = true;
         System.out.println("===========================================");
         System.out.print("Your Choice: ");
         Scanner sc = new Scanner(System.in);
+        while(!sc.hasNextInt()) {
+            System.out.println("Please enter one of the given options - which is number 1, 2, 3 or 4.");
+            System.out.print("Your Choice: ");
+            sc.next();
+        }
         int selectedCivillization = sc.nextInt();
         if (selectedCivillization == 1) {
             userName = "George Washionton";
-        } if (selectedCivillization == 2) {
+        } else if (selectedCivillization == 2) {
             userName = "Shaka";
-        } if (selectedCivillization == 3) {
+        } else if (selectedCivillization == 3) {
             userName = "Queen Elizabeth I";
-        } if (selectedCivillization == 4) {
+        } else if (selectedCivillization == 4) {
             userName = "Wu Ze Tian";
+        } else {
+            System.out.println("You need to choose between number 1 to 4. Let's give it another shot.");
+            selectCivilization();
         }
         System.out.println();
         System.out.printf("Good choice, %s!\n", userName);
@@ -120,7 +128,7 @@ static boolean isFirstRun = true;
         } else {
         selectPerformableAction();
         System.out.println();
-        System.out.println("A new turn has begun!");
+        System.out.println("A new round has begun!");
     }
     }
 
@@ -160,7 +168,7 @@ public static void reviewCurrentAssets() {
         System.out.println("===========================================");
 }
 
-public static void newActions() {
+    public static void newActions() {
         System.out.println();
         System.out.println("Let's now take a look at all of your options.");
         System.out.println("================ CHOICES ==================");
@@ -173,21 +181,27 @@ public static void newActions() {
         System.out.println("===========================================");
         System.out.print("Your Choice: ");
         Scanner sc = new Scanner(System.in);
+        while(!sc.hasNextInt()) {
+            System.out.println("Please enter one of the given options - which is number 1, 2, 3, 4, 5 or 6.");
+            sc.next();
+        }
         int selectedAction = sc.nextInt();
         if (selectedAction == 1) {
             settleCity();
-        } if (selectedAction == 2) {
+        } else if (selectedAction == 2) {
             demolishCity();
-        } if (selectedAction == 3) {
+        } else if (selectedAction == 3) {
             buildMilitia();
-        } if (selectedAction == 4) {
+        } else if (selectedAction == 4) {
             reserchTechnology();
-        } if (selectedAction == 5) {
+        } else if (selectedAction == 5) {
             attackEnemyCity();
-        } if (selectedAction == 6) {
+        } else if (selectedAction == 6) {
             skipTurn();
+        } else {
+            System.out.println("Invalid choice. Please choose again.");
+            newActions();
         }
-
 }
 
     public static void settleCity(){
@@ -218,8 +232,8 @@ public static void newActions() {
     }
 
     public static void demolishCity(){
+        int forErrorHandlingOptionInt = 0;
         arrayPurifier();
-        System.out.println(cachedNumberOfCities);
         if (cachedNumberOfCities > 1) {
         System.out.println("===========================================");
         System.out.printf("%s, you own the following cities: \n", userName);
@@ -228,39 +242,49 @@ public static void newActions() {
             String cityName = cities[i];
             if (cityName != null) {
                 System.out.printf("%d: %s\n", i+1, cityName);
+                forErrorHandlingOptionInt = i+1;
             }
         }
         System.out.printf("Which one of these cities would you like to demolish?\n");
         System.out.printf("Your choice: ");
         Scanner sc = new Scanner(System.in);
+        while(!sc.hasNextInt()) {
+            System.out.println("Please enter one of the given numerical options.");
+            sc.next();
+        }
         int cityIndex = sc.nextInt();
-        if (cityIndex != 0) {
-            System.out.printf("You have demolished %s city. As a result, you gained 1.5 resources, adding up to a total of %.2f resources", cities[cityIndex - 1], resources + 1.5);
-            cities[cityIndex - 1] = null;
-            resources = resources + 1.5;
-            arrayPurifier();
-        System.out.println("===========================================");
+        if (cityIndex <= forErrorHandlingOptionInt) {
+            if (cityIndex != 0) {
+                System.out.printf("You have demolished %s city. As a result, you gained 1.5 resources, adding up to a total of %.2f resources", cities[cityIndex - 1], resources + 1.5);
+                cities[cityIndex - 1] = null;
+                resources = resources + 1.5;
+                arrayPurifier();
+                System.out.println();
+            }
+            } else {
+            System.out.println("You can only demolish a city that you own. Please try again.");
+            forErrorHandlingOptionInt = 0;
+            cityIndex = 0;
+            demolishCity();
         }
-            numberOfCities();
-        } else {
-            numberOfCities();
-            System.out.println("You only have one city and at least one city is required for this game to proceed. Please select another action.");
-            newActions();
-        }
-    }
+    }             else {
 
+                System.out.println("You only have one city and at least one city is required for this game to proceed. Please select another action.");
+                newActions();
+            }
+}
     public static void buildMilitia(){
     if (gold >= 5 && resources >= 3) {
         gold = gold - 5; 
         resources = resources- 3; 
         millitaryUnits = millitaryUnits + 1;
         System.out.println();
-    System.out.printf("Successfully built a Militia! After spending 5 gold and 3 resources, you now have 1 more resources, which adds up to %.2f resources!\n", resources);
+        System.out.printf("Successfully built a Militia! After spending 5 gold and 3 resources, you now have 1 more resources, which adds up to %.2f resources!\n", resources);
         System.out.println();
-} else {
+    } else {
             System.out.println("You don't have enough gold or resources. Please select another action.");
             newActions();
-        }
+    }
 }
 
     public static void reserchTechnology() {
