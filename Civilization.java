@@ -78,10 +78,10 @@ static boolean isFirstRun = true;
         System.out.println();
         System.out.println("CHOICES");
         System.out.println("===========================================");
-        System.out.println("1.     American (George Washionton)");
-        System.out.println("2.         Zulu (Shaka)");
-        System.out.println("3.      English (Queen Elizabeth I)");
-        System.out.println("4.      Chinese (Wu Ze Tian)");
+        System.out.println("[1]     American (George Washionton)");
+        System.out.println("[2]         Zulu (Shaka)");
+        System.out.println("[3]      English (Queen Elizabeth I)");
+        System.out.println("[4]      Chinese (Wu Ze Tian)");
         System.out.println("===========================================");
         System.out.print("Your Choice: ");
         Scanner sc = new Scanner(System.in);
@@ -133,7 +133,7 @@ static boolean isFirstRun = true;
     }
 
     public static void selectPerformableAction() {
-        arrayPurifier();
+        sortCitiesArray();
         reviewCurrentAssets();
         pressEnterToContinue();
         newActions();
@@ -154,7 +154,7 @@ public static void reviewCurrentAssets() {
             }
             System.out.printf("\n");
         } else if (cachedNumberOfCities > 0) {
-        arrayPurifier();
+        sortCitiesArray();
         System.out.printf("         %d City | %s\n", cachedNumberOfCities, cities[0]); 
         } else {
         System.out.printf("    No City Yet |\n");    
@@ -172,12 +172,12 @@ public static void reviewCurrentAssets() {
         System.out.println();
         System.out.println("Let's now take a look at all of your options.");
         System.out.println("================ CHOICES ==================");
-        System.out.println("1. Settle a city.");
-        System.out.println("2. Demolish a City.");
-        System.out.println("3. Build Militia.");
-        System.out.println("4. Research Technology.");
-        System.out.println("5. Attack Enemy City.");
-        System.out.println("6. Skip Turn");
+        System.out.println("[1] Settle a city.");
+        System.out.println("[2] Demolish a City.");
+        System.out.println("[3] Build Militia.");
+        System.out.println("[4] Research Technology.");
+        System.out.println("[5] Attack Enemy City.");
+        System.out.println("[6] Skip Turn");
         System.out.println("===========================================");
         System.out.print("Your Choice: ");
         Scanner sc = new Scanner(System.in);
@@ -205,7 +205,7 @@ public static void reviewCurrentAssets() {
 }
 
     public static void settleCity(){
-        arrayPurifier();
+        sortCitiesArray();
         if (gold >= 15.5) {
                     if (numberOfCities() < 5) {
                     System.out.println();
@@ -219,7 +219,7 @@ public static void reviewCurrentAssets() {
                     } else {
                     gold = gold - 15.5;
                 }
-                    arrayPurifier();
+                    sortCitiesArray();
                     System.out.println();
                 } else {
                     System.out.println("You already have 5 cities. As a result, you can no longer create any more new cities. \nPlease select another action.");
@@ -233,7 +233,7 @@ public static void reviewCurrentAssets() {
 
     public static void demolishCity(){
         int forErrorHandlingOptionInt = 0;
-        arrayPurifier();
+        sortCitiesArray();
         if (cachedNumberOfCities > 1) {
         System.out.println("===========================================");
         System.out.printf("%s, you own the following cities: \n", userName);
@@ -241,7 +241,7 @@ public static void reviewCurrentAssets() {
         for (int i = 0; i <= 4; i ++) {
             String cityName = cities[i];
             if (cityName != null) {
-                System.out.printf("%d: %s\n", i+1, cityName);
+                System.out.printf("[%d] %s\n", i+1, cityName);
                 forErrorHandlingOptionInt = i+1;
             }
         }
@@ -258,7 +258,7 @@ public static void reviewCurrentAssets() {
                 System.out.printf("You have demolished %s city. As a result, you gained 1.5 resources, adding up to a total of %.2f resources", cities[cityIndex - 1], resources + 1.5);
                 cities[cityIndex - 1] = null;
                 resources = resources + 1.5;
-                arrayPurifier();
+                sortCitiesArray();
                 System.out.println();
             }
             } else {
@@ -320,7 +320,7 @@ public static void reviewCurrentAssets() {
         System.out.println("You have choosen to skip this turn.");
     }
 
-    public static void arrayPurifier() {
+    public static void sortCitiesArray() {
         for (int i = 0; i < 4; i ++) {
             String cityName = cities[i];
             if (cityName == null) {
