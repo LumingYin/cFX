@@ -105,7 +105,10 @@ static boolean isFirstRun = true;
         }
         System.out.println();
         System.out.printf("Good choice, %s!\n", userName);
+        System.out.printf("To help you get started, you are provided with 20.5 Gold, 30 Resources and 10 Happiness.");
+        reviewCurrentAssets();
         System.out.printf("Now, it's time to settle your first city!\n");
+        System.out.printf("The first city you settle will be free. After you successfully settle your first city, you will recieve 3 gold for the city.\n");
         settleCity();
 }
 
