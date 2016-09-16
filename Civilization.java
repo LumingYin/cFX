@@ -2,26 +2,25 @@ import java.util.Scanner;
 import java.lang.Math;
 
 public class Civilization {
-static String userName = new String();
-static boolean playing = true;
+    static String userName = new String();
+    static boolean playing = true;
 
-//User's properties
-static String cities[] = new String[5];
-static int cachedNumberOfCities = 0;
-static int numberOfAttacks = 0;
-static double gold = 20.5;
-static double resources = 30;
-static int happiness = 10;
-static int millitaryUnits = 0;
-static int technology = 0;
-static boolean isFirstRun = true;
-
+    // User's properties
+    static String cities[] = new String[5];
+    static int cachedNumberOfCities = 0;
+    static int numberOfAttacks = 0;
+    static double gold = 20.5;
+    static double resources = 30;
+    static int happiness = 10;
+    static int millitaryUnits = 0;
+    static int technology = 0;
+    static boolean isFirstRun = true;
 
     public static void main(String[] args) {
-        while(playing) {
-        if (isFirstRun) {
-            selectCivilization();
-        }
+        while (playing) {
+            if (isFirstRun) {
+                selectCivilization();
+            }
             preNewRoundScript();
         }
         System.out.println("CONGRATULATIONS!");
@@ -31,24 +30,17 @@ static boolean isFirstRun = true;
 
     public static void pressEnterToContinue() {
         System.out.printf("Press ENTER key to Continue: ");
-        try
-        {
+        try {
             System.in.read();
-        }  
-        catch(Exception e)
-        {
+        } catch (Exception e) {
         }
     }
 
-
     public static void endGameReset() {
         System.out.printf("Press ENTER key to play again: ");
-        try
-        {
+        try {
             System.in.read();
-        }  
-        catch(Exception e)
-        {
+        } catch (Exception e) {
         }
         selectPerformableAction();
         userName = null;
@@ -68,7 +60,6 @@ static boolean isFirstRun = true;
         isFirstRun = true;
     }
 
-    
     public static void selectCivilization() {
         System.out.println();
         System.out.println();
@@ -85,7 +76,7 @@ static boolean isFirstRun = true;
         System.out.println("===========================================");
         System.out.print("Your Choice: ");
         Scanner sc = new Scanner(System.in);
-        while(!sc.hasNextInt()) {
+        while (!sc.hasNextInt()) {
             System.out.println("Please enter one of the given options - which is number 1, 2, 3 or 4.");
             System.out.print("Your Choice: ");
             sc.next();
@@ -108,9 +99,10 @@ static boolean isFirstRun = true;
         System.out.printf("To help you get started, you are provided with 20.5 Gold, 30 Resources and 10 Happiness.");
         reviewCurrentAssets();
         System.out.printf("Now, it's time to settle your first city!\n");
-        System.out.printf("The first city you settle will be free. After you successfully settle your first city, you will recieve 3 gold for the city.\n");
+        System.out.printf(
+                "The first city you settle will be free. After you successfully settle your first city, you will recieve 3 gold for the city.\n");
         settleCity();
-}
+    }
 
     public static void preNewRoundScript() {
         if (happiness > 20) {
@@ -129,10 +121,10 @@ static boolean isFirstRun = true;
         if (technology >= 20 || numberOfAttacks >= 10) {
             playing = false;
         } else {
-        selectPerformableAction();
-        System.out.println();
-        System.out.println("A new round has begun!");
-    }
+            selectPerformableAction();
+            System.out.println();
+            System.out.println("A new round has begun!");
+        }
     }
 
     public static void selectPerformableAction() {
@@ -140,9 +132,9 @@ static boolean isFirstRun = true;
         reviewCurrentAssets();
         pressEnterToContinue();
         newActions();
-}
+    }
 
-public static void reviewCurrentAssets() {
+    public static void reviewCurrentAssets() {
         System.out.println("Let's review what you already own.");
         System.out.println("============== OWNERSHIP ==================");
         if (cachedNumberOfCities > 1) {
@@ -157,10 +149,10 @@ public static void reviewCurrentAssets() {
             }
             System.out.printf("\n");
         } else if (cachedNumberOfCities > 0) {
-        sortCitiesArray();
-        System.out.printf("         %d City | %s\n", cachedNumberOfCities, cities[0]); 
+            sortCitiesArray();
+            System.out.printf("         %d City | %s\n", cachedNumberOfCities, cities[0]);
         } else {
-        System.out.printf("    No City Yet |\n");    
+            System.out.printf("    No City Yet |\n");
         }
         System.out.printf(" Num of Attacks | %d\n", numberOfAttacks);
         System.out.printf("           Gold | %.2f\n", gold);
@@ -169,7 +161,7 @@ public static void reviewCurrentAssets() {
         System.out.printf("Millitary Units | %d\n", millitaryUnits);
         System.out.printf("Technology Pts. | %d\n", technology);
         System.out.println("===========================================");
-}
+    }
 
     public static void newActions() {
         System.out.println();
@@ -180,11 +172,11 @@ public static void reviewCurrentAssets() {
         System.out.println("[3] Build Militia.");
         System.out.println("[4] Research Technology.");
         System.out.println("[5] Attack Enemy City.");
-        System.out.println("[6] Skip Turn");
+        System.out.println("[6] Skip Turn.");
         System.out.println("===========================================");
         System.out.print("Your Choice: ");
         Scanner sc = new Scanner(System.in);
-        while(!sc.hasNextInt()) {
+        while (!sc.hasNextInt()) {
             System.out.println("Please enter one of the given options - which is number 1, 2, 3, 4, 5 or 6.");
             sc.next();
         }
@@ -205,99 +197,109 @@ public static void reviewCurrentAssets() {
             System.out.println("Invalid choice. Please choose again.");
             newActions();
         }
-}
-
-    public static void settleCity(){
-        sortCitiesArray();
-        if (gold >= 15.5) {
-                    if (numberOfCities() < 5) {
-                    System.out.println();
-                    System.out.printf("What would you like to call your city, %s?\n", userName);
-                    System.out.print("Your City's Name: ");
-                    Scanner sc = new Scanner(System.in);
-                    String cityName = sc.nextLine();
-                    cities[numberOfCities()] = cityName;
-                    if (isFirstRun == true) {
-                        isFirstRun = false;
-                    } else {
-                    gold = gold - 15.5;
-                }
-                    sortCitiesArray();
-                    System.out.println();
-                } else {
-                    System.out.println("You already have 5 cities. As a result, you can no longer create any more new cities. \nPlease select another action.");
-                    newActions();
-                }
-            } else {
-                    System.out.println("You don't have enough gold. Therefore, you can not create new cities. \nPlease select another action.");
-                    newActions();
-            }
     }
 
-    public static void demolishCity(){
+    public static void settleCity() {
+        sortCitiesArray();
+        if (gold >= 15.5) {
+            if (numberOfCities() < 5) {
+                System.out.println();
+                System.out.printf("What would you like to call your city, %s?\n", userName);
+                System.out.print("Your City's Name: ");
+                Scanner sc = new Scanner(System.in);
+                String cityName = sc.nextLine();
+                cities[numberOfCities()] = cityName;
+                if (isFirstRun == true) {
+                    isFirstRun = false;
+                } else {
+                    gold = gold - 15.5;
+                }
+                sortCitiesArray();
+                System.out.println();
+            } else {
+                System.out.println(
+                        "You already have 5 cities. As a result, you can no longer create any more new cities. \nPlease select another action.");
+                newActions();
+            }
+        } else {
+            System.out.println(
+                    "You don't have enough gold. Therefore, you can not create new cities. \nPlease select another action.");
+            newActions();
+        }
+    }
+
+    public static void demolishCity() {
         int forErrorHandlingOptionInt = 0;
         sortCitiesArray();
         if (cachedNumberOfCities > 1) {
-        System.out.println("===========================================");
-        System.out.printf("%s, you own the following cities: \n", userName);
-        System.out.printf("0: Do not demolish any city.\n");
-        for (int i = 0; i <= 4; i ++) {
-            String cityName = cities[i];
-            if (cityName != null) {
-                System.out.printf("[%d] %s\n", i+1, cityName);
-                forErrorHandlingOptionInt = i+1;
+            System.out.println("===========================================");
+            System.out.printf("%s, you own the following cities: \n", userName);
+            System.out.printf("0: Do not demolish any city.\n");
+            for (int i = 0; i <= 4; i++) {
+                String cityName = cities[i];
+                if (cityName != null) {
+                    System.out.printf("[%d] %s\n", i + 1, cityName);
+                    forErrorHandlingOptionInt = i + 1;
+                }
             }
-        }
-        System.out.printf("Which one of these cities would you like to demolish?\n");
-        System.out.printf("Your choice: ");
-        Scanner sc = new Scanner(System.in);
-        while(!sc.hasNextInt()) {
-            System.out.println("Please enter one of the given numerical options.");
-            sc.next();
-        }
-        int cityIndex = sc.nextInt();
-        if (cityIndex <= forErrorHandlingOptionInt) {
-            if (cityIndex != 0) {
-                System.out.printf("You have demolished %s city. As a result, you gained 1.5 resources, adding up to a total of %.2f resources", cities[cityIndex - 1], resources + 1.5);
-                cities[cityIndex - 1] = null;
-                resources = resources + 1.5;
-                sortCitiesArray();
-                System.out.println();
+            System.out.printf("Which one of these cities would you like to demolish?\n");
+            System.out.printf("Your choice: ");
+            Scanner sc = new Scanner(System.in);
+            while (!sc.hasNextInt()) {
+                System.out.println("Please enter one of the given numerical options.");
+                sc.next();
             }
+            int cityIndex = sc.nextInt();
+            if (cityIndex <= forErrorHandlingOptionInt) {
+                if (cityIndex != 0) {
+                    System.out.printf(
+                            "You have demolished %s city. As a result, you gained 1.5 resources, adding up to a total of %.2f resources",
+                            cities[cityIndex - 1], resources + 1.5);
+                    cities[cityIndex - 1] = null;
+                    resources = resources + 1.5;
+                    sortCitiesArray();
+                    System.out.println();
+                }
             } else {
-            System.out.println("You can only demolish a city that you own. Please try again.");
-            forErrorHandlingOptionInt = 0;
-            cityIndex = 0;
-            demolishCity();
-        }
-    }             else {
-
-                System.out.println("You only have one city and at least one city is required for this game to proceed. Please select another action.");
-                newActions();
+                System.out.println("You can only demolish a city that you own. Please try again.");
+                forErrorHandlingOptionInt = 0;
+                cityIndex = 0;
+                demolishCity();
             }
-}
-    public static void buildMilitia(){
-    if (gold >= 5 && resources >= 3) {
-        gold = gold - 5; 
-        resources = resources- 3; 
-        millitaryUnits = millitaryUnits + 1;
-        System.out.println();
-        System.out.printf("Successfully built a Militia! After spending 5 gold and 3 resources, you now have 1 more resources, which adds up to %.2f resources!\n", resources);
-        System.out.println();
-    } else {
+        } else {
+
+            System.out.println(
+                    "You only have one city and at least one city is required for this game to proceed. Please select another action.");
+            newActions();
+        }
+    }
+
+    public static void buildMilitia() {
+        if (gold >= 5 && resources >= 3) {
+            gold = gold - 5;
+            resources = resources - 3;
+            millitaryUnits = millitaryUnits + 1;
+            System.out.println();
+            System.out.printf(
+                    "Successfully built a Militia! After spending 5 gold and 3 resources, you now have 1 more resources, which adds up to %.2f resources!\n",
+                    resources);
+            System.out.println();
+        } else {
             System.out.println("You don't have enough gold or resources. Please select another action.");
             newActions();
+        }
     }
-}
 
     public static void reserchTechnology() {
-        if (gold >= 50 && resources >=2) {
-        gold = gold - 50;
-        resources = resources - 2;
-        technology = technology + 1;
-        System.out.println();
-        System.out.printf("Successfully developed research technology! After spending 50 gold and 2 resources, you now have 1 more technology, which adds up to %d technologies!\n", technology);
-        System.out.println();
+        if (gold >= 50 && resources >= 2) {
+            gold = gold - 50;
+            resources = resources - 2;
+            technology = technology + 1;
+            System.out.println();
+            System.out.printf(
+                    "Successfully developed research technology! After spending 50 gold and 2 resources, you now have 1 more technology, which adds up to %d technologies!\n",
+                    technology);
+            System.out.println();
         } else {
             System.out.println("You don't have enough gold or resources. Please select another action.");
             newActions();
@@ -306,17 +308,17 @@ public static void reviewCurrentAssets() {
 
     public static void attackEnemyCity() {
         if (millitaryUnits >= 6) {
-        millitaryUnits = millitaryUnits - 6;
-        happiness = happiness - 3;
-        gold = gold + 10;
-        numberOfAttacks ++;
-        System.out.println();
-        System.out.printf("Successfully attacked enemy city. You now have %d millitary units!\n", millitaryUnits);
-        System.out.println();
-    } else {
+            millitaryUnits = millitaryUnits - 6;
+            happiness = happiness - 3;
+            gold = gold + 10;
+            numberOfAttacks++;
+            System.out.println();
+            System.out.printf("Successfully attacked enemy city. You now have %d millitary units!\n", millitaryUnits);
+            System.out.println();
+        } else {
             System.out.println("Not enough millitary units are at your command. Please select another action.");
             newActions();
-    }
+        }
     }
 
     public static void skipTurn() {
@@ -324,7 +326,7 @@ public static void reviewCurrentAssets() {
     }
 
     public static void sortCitiesArray() {
-        for (int i = 0; i < 4; i ++) {
+        for (int i = 0; i < 4; i++) {
             String cityName = cities[i];
             if (cityName == null) {
                 int firstNullCityIndex = i;
@@ -334,12 +336,12 @@ public static void reviewCurrentAssets() {
                 }
             }
         }
-    numberOfCities();
+        numberOfCities();
     }
 
     public static int numberOfCities() {
         int numberOfCities = 0;
-        for (int i=0; i <= 4; i++) {
+        for (int i = 0; i <= 4; i++) {
             String cityName = cities[i];
             if (cityName != null) {
                 numberOfCities++;
@@ -348,6 +350,5 @@ public static void reviewCurrentAssets() {
         cachedNumberOfCities = numberOfCities;
         return numberOfCities;
     }
-
 
 }
