@@ -59,6 +59,17 @@ public class QinDynasty {
 	}
 	// specific methods begins here
 
+	public QinDynasty() {
+		population = new Population();
+		treasury = new Treasury();
+		coalMine = new CoalMine();
+		river = new River("River");
+		technology = new Technology();
+		strategy = new Strategy();
+		settlementArray = new Settlement[10];
+		hills = new Hills();
+	}
+	
 	public Hills getHills() {
 		return hills;
 	}

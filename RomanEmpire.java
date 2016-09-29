@@ -60,6 +60,17 @@ public class RomanEmpire {
 
 	// specific methods begins here
 
+	public RomanEmpire() {
+		population = new Population();
+		treasury = new Treasury();
+		coalMine = new CoalMine();
+		river = new River("River");
+		technology = new Technology();
+		strategy = new Strategy();
+		settlementArray = new Settlement[10];
+		hills = new Hills();
+	}
+
 	public Hills getHills() {
 		return hills;
 	}
