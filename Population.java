@@ -1,26 +1,26 @@
 import java.util.Random;
 
 public class Population {
-	private int warriors = 50;
-	private int civilians = 50;
-	private int happiness = 200;
+    private int warriors = 50;
+    private int civilians = 50;
+    private int happiness = 200;
     private Random rand = new Random();
 
     public void increaseHappiness(int amount) {
-    	happiness = happiness + amount;
+        happiness = happiness + amount;
     }
 
     public void decreaseHappiness(int amount) {
         if (amount > happiness) {
-		  happiness = happiness - amount;
+            happiness = happiness - amount;
         }
-	}
+    }
 
-	public void canWork(int numberOfWorkers) {
-		if (numberOfWorkers <= civilians) {
-			civilians = civilians - numberOfWorkers;
-		}
-	}
+    public void canWork(int numberOfWorkers) {
+        if (numberOfWorkers <= civilians) {
+            civilians = civilians - numberOfWorkers;
+        }
+    }
 
     public boolean canBattle() {
         if (warriors > rand.nextInt(100)) {
@@ -31,11 +31,11 @@ public class Population {
     }
 
     public Game hunt(Hills h) {
-    	return h.hunt();
+        return h.hunt();
     }
 
     public Fish fish(River r) {
-    	return r.getFish();
+        return r.getFish();
     }
 
     public int getPopulation() {
@@ -61,10 +61,10 @@ public class Population {
             c.burn();
             totalNumberOfBurns++;
         }
-            if (totalNumberOfBurns == 4) {
-                warriors = warriors + 40;
-                civilians = civilians + 60;
-                return true;
+        if (totalNumberOfBurns == 4) {
+            warriors = warriors + 40;
+            civilians = civilians + 60;
+            return true;
         } else {
             c.increaseCoal(totalNumberOfBurns);
             return false;

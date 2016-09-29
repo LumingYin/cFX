@@ -1,17 +1,21 @@
 import java.util.Scanner;
+import java.util.Random;
 
 public class Desert {
     private Scanner scan = new Scanner(System.in);
+    private Random rand = new Random();
 
     public int findTreasure() {
         boolean getLost = false;
-        int coinsFound = scan.nextInt(500) + 1;
-        int getLostRandomNumber = scan.nextInt(10);
-        getLost = getLostRandomNumber == 0 ? true : false;
-
-        while (getLost == true) {
-            getLost = lost();
+        int coinsFound = rand.nextInt(500) + 1;
+        int getLostRandomNumber = rand.nextInt(100) + 1;
+        if (getLostRandomNumber <= 10) {
+            while (lost()) {
+                coinsFound = coinsFound;
+            }
         }
+
+
         return coinsFound;
     }
 

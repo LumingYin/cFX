@@ -12,4 +12,5 @@ public class Fish {
     public int getHealth() {
         return healthIncrease;
     }
+
 }

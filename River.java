@@ -1,47 +1,53 @@
 import java.util.Random;
 
 public class River {
-	private String name;
-	private Fish[] fishArray = new Fish[5];
+    private String name;
+    private Fish[] fishArray = new Fish[5];
+    private Random randomNumberGenerator;
 
-	public River(String name) {
-		this.name = name;
-		generateRandomFish();
-	}
+    public River(String name) {
+        randomNumberGenerator = new Random();
+        this.name = name;
+        generateRandomFish();
+    }
 
-	private void generateRandomFish() {
-		Random randomNumberGenerator = new Random();
-		for (Fish f : fishArray) {
-			int n = randomNumberGenerator.nextInt(5);
-			f = new Fish(n);
-		}
-	}
+    private void generateRandomFish() {
+        for (int i = 0; i < fishArray.length; i++) {
+            int n = randomNumberGenerator.nextInt(5);
+            fishArray[i] = new Fish(n);
+        }
+    }
 
-	public Fish getFish() {
-		for (Fish f: fishArray) {
-			if (f != null) {
-				return f;
-			}
-		}
-		return null;
-	}
+    public Fish getFish() {
+        for (int i = 0; i < fishArray.length; i++) {
+            if (fishArray[i] != null) {
+                Fish toBeReturned = fishArray[i];
+                fishArray[i] = null;
+                return toBeReturned;
+            }
+        }
+        return null;
+    }
 
-	public boolean replenishFish() {
-		boolean isEmpty = true;
-		for (Fish f: fishArray) {
-			if (f != null) {
-				isEmpty = false;
-			}
-		}
-		if (isEmpty == false) {
-			return false;
-		} else {
-			generateRandomFish();
-			return true;
-		}
-	}
+    public boolean replenishFish() {
+        if (riverIsEmpty()) {
+            generateRandomFish();
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-	public String getName() {
-		return name;
-	}
+    private boolean riverIsEmpty() {
+        for (int i = 0; i < fishArray.length; i++) {
+            if (fishArray[i] != null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
