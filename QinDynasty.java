@@ -64,7 +64,7 @@ public class QinDynasty {
         population = new Population();
         treasury = new Treasury();
         coalMine = new CoalMine();
-        river = new River("Qin");
+        river = new River("Qin River");
         technology = new Technology();
         strategy = new Strategy();
         settlementArray = new Settlement[10];

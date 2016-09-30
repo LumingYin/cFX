@@ -44,10 +44,10 @@ public class Technology {
         // foundMeaningOfLife to be true in order for
         // technology to win
 
-        // "&&" is used as indicated by the instructions
-        // on cs1331.gatech.edu/fall2016/hw2/hw2.html
+        // "||" (OR) is used as indicated by the
+        // discussions on Piazza
         boolean winStatus =
-            builtWonderOfTheWorld && foundMeaningOfLife ? true : false;
+            builtWonderOfTheWorld || foundMeaningOfLife ? true : false;
         return winStatus;
     }
 
