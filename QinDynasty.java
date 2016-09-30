@@ -5,7 +5,7 @@ public class QinDynasty {
     private River river;
     private Technology technology;
     private Strategy strategy;
-    private Settlement[] settlementArray = new Settlement[10];
+    private Settlement[] settlementArray;
     // specific variable begins here
     private Hills hills;
 
@@ -57,13 +57,14 @@ public class QinDynasty {
     public Settlement[] getSettlements() {
         return settlementArray;
     }
+
     // specific methods begins here
 
     public QinDynasty() {
         population = new Population();
         treasury = new Treasury();
         coalMine = new CoalMine();
-        river = new River("River");
+        river = new River("Qin");
         technology = new Technology();
         strategy = new Strategy();
         settlementArray = new Settlement[10];
@@ -75,7 +76,7 @@ public class QinDynasty {
     }
 
     public boolean buildWall(Settlement s) {
-        if (s.build(treasury.getCoins(), population, 1000, 100)) {
+        if (this.getNumSettlements() < 10 && s.build(treasury.getCoins(), population, 1000, 100)) {
             technology.increaseExperience(10);
             treasury.spend(1000);
             population.canWork(100);
@@ -87,7 +88,7 @@ public class QinDynasty {
 
 
     public boolean buildHouse(Settlement s) {
-        if (s.build(treasury.getCoins(), population, 30, 8)) {
+        if (this.getNumSettlements() < 10 && s.build(treasury.getCoins(), population, 30, 8)) {
             technology.increaseExperience(10);
             treasury.spend(30);
             population.canWork(8);
@@ -98,7 +99,9 @@ public class QinDynasty {
     }
 
     public void establishLegalism() {
-        technology.philosophize();
-        population.decreaseHappiness(20);
+        if (population.getHappiness() >= 20) {
+            technology.philosophize();
+            population.decreaseHappiness(20);
+        }
     }
 }

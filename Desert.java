@@ -2,8 +2,8 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class Desert {
-    private Scanner scan = new Scanner(System.in);
-    private Random rand = new Random();
+    private static Scanner scan = new Scanner(System.in);
+    private static Random rand = new Random();
 
     public int findTreasure() {
         boolean getLost = false;
@@ -14,8 +14,6 @@ public class Desert {
                 coinsFound = coinsFound;
             }
         }
-
-
         return coinsFound;
     }
 

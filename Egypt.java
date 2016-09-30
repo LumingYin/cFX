@@ -64,7 +64,7 @@ public class Egypt {
         population = new Population();
         treasury = new Treasury();
         coalMine = new CoalMine();
-        river = new River("River");
+        river = new River("Bolbitinic");
         technology = new Technology();
         strategy = new Strategy();
         settlementArray = new Settlement[10];
@@ -77,9 +77,7 @@ public class Egypt {
     }
 
     public boolean buildPyramid(Settlement s) {
-        System.out.println(population);
-        System.out.println(population.getPopulation());
-        if (s.build(treasury.getCoins(), population, 500, 100)) {
+        if (getNumSettlements() < 10 && s.build(treasury.getCoins(), population, 500, 100)) {
             technology.increaseExperience(10);
             treasury.spend(500);
             population.canWork(100);

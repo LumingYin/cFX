@@ -1,10 +1,17 @@
 import java.util.Random;
 
 public class Population {
-    private int warriors = 50;
-    private int civilians = 50;
-    private int happiness = 200;
-    private Random rand = new Random();
+    private int warriors;
+    private int civilians;
+    private int happiness;
+    private Random rand;
+
+    public Population() {
+        warriors = 50;
+        civilians = 50;
+        happiness = 200;
+        rand = new Random();
+    }
 
     public void increaseHappiness(int amount) {
         happiness = happiness + amount;
@@ -13,6 +20,8 @@ public class Population {
     public void decreaseHappiness(int amount) {
         if (amount > happiness) {
             happiness = happiness - amount;
+        } else {
+            happiness = 0;
         }
     }
 
@@ -54,25 +63,41 @@ public class Population {
         this.warriors = a;
     }
 
-    public boolean canCook(Game f, CoalMine c) {
-        int totalNumberOfBurns = 0;
-        //if (totalNumberOfBurns >= 4) {
+    public boolean canCook(Game g, CoalMine c) {
+        int tempNumberOfBurns = 0;
         for (int i = 0; i < 4; i++) {
             c.burn();
-            totalNumberOfBurns++;
+            tempNumberOfBurns++;
         }
-        if (totalNumberOfBurns == 4) {
+        if (tempNumberOfBurns == 4) {
             warriors = warriors + 40;
             civilians = civilians + 60;
             return true;
         } else {
-            c.increaseCoal(totalNumberOfBurns);
+            c.increaseCoal(tempNumberOfBurns);
             return false;
         }
     }
 
     public boolean canCook(Fish f, CoalMine c) {
-        return false;
+        int tempNumberOfBurns = 0;
+        for (int i = 0; i < 4; i++) {
+            c.burn();
+            tempNumberOfBurns++;
+        }
+        if (tempNumberOfBurns == 4) {
+            warriors = warriors + 10;
+            civilians = civilians + 15;
+            return true;
+        } else {
+            c.increaseCoal(tempNumberOfBurns);
+            return false;
+        }
     }
+
+    public int getHappiness() {
+        return happiness;
+    }
+
 
 }

@@ -2,10 +2,11 @@ import java.util.Random;
 
 public class River {
     private String name;
-    private Fish[] fishArray = new Fish[5];
+    private Fish[] fishArray;
     private Random randomNumberGenerator;
 
     public River(String name) {
+        fishArray = new Fish[5];
         randomNumberGenerator = new Random();
         this.name = name;
         generateRandomFish();

@@ -1,8 +1,15 @@
 public class Technology {
-    private int understanding = 0;
-    private boolean foundMeaningOfLife = false;
-    private int experienceLevel = 0;
-    private boolean builtWonderOfTheWorld = false;
+    private int understanding;
+    private boolean foundMeaningOfLife;
+    private int experienceLevel;
+    private boolean builtWonderOfTheWorld;
+
+    public Technology() {
+        understanding = 0;
+        foundMeaningOfLife = false;
+        experienceLevel = 0;
+        builtWonderOfTheWorld = false;
+    }
 
     public void philosophize() {
         understanding = understanding + 25;
@@ -22,6 +29,7 @@ public class Technology {
 
     public void increaseExperience(int experienceLevelIncrease) {
         experienceLevel = experienceLevel + experienceLevelIncrease;
+        updateBuiltWonderOfTheWorld();
     }
 
     private void updateBuiltWonderOfTheWorld() {
@@ -31,6 +39,13 @@ public class Technology {
     }
 
     public boolean hasTechnologyWin() {
+        // I have heard mixed discussions as whether
+        // it requires both builtWonderOfTheWorld and
+        // foundMeaningOfLife to be true in order for
+        // technology to win
+
+        // "&&" is used as indicated by the instructions
+        // on cs1331.gatech.edu/fall2016/hw2/hw2.html
         boolean winStatus =
             builtWonderOfTheWorld && foundMeaningOfLife ? true : false;
         return winStatus;

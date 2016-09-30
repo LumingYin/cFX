@@ -5,7 +5,7 @@ public class RomanEmpire {
     private River river;
     private Technology technology;
     private Strategy strategy;
-    private Settlement[] settlementArray = new Settlement[10];
+    private Settlement[] settlementArray;
     // specific variable begins here
     private Hills hills;
 
@@ -64,7 +64,7 @@ public class RomanEmpire {
         population = new Population();
         treasury = new Treasury();
         coalMine = new CoalMine();
-        river = new River("River");
+        river = new River("Tiber");
         technology = new Technology();
         strategy = new Strategy();
         settlementArray = new Settlement[10];
@@ -76,8 +76,7 @@ public class RomanEmpire {
     }
 
     public boolean buildAqueduct(Settlement s) {
-        System.out.println(population);
-        if (s.build(treasury.getCoins(), population, 250, 130)) {
+        if (getNumSettlements() < 10 && s.build(treasury.getCoins(), population, 250, 130)) {
             technology.increaseExperience(10);
             population.canWork(130);
             treasury.spend(250);
@@ -88,8 +87,7 @@ public class RomanEmpire {
     }
 
     public boolean buildBathHouse(Settlement s) {
-        System.out.println(population);
-        if (s.build(treasury.getCoins(), population, 110, 20)) {
+        if (getNumSettlements() < 10 && s.build(treasury.getCoins(), population, 110, 20)) {
             technology.increaseExperience(10);
             treasury.spend(110);
             population.canWork(20);
@@ -101,7 +99,6 @@ public class RomanEmpire {
 
 
     public boolean buildVilla(Settlement s) {
-        System.out.println(population);
         if (s.build(treasury.getCoins(), population, 80, 15)) {
             technology.increaseExperience(5);
             treasury.spend(250);
@@ -114,7 +111,9 @@ public class RomanEmpire {
 
 
     public void studyPhilosophy() {
-        population.decreaseHappiness(10);
-        technology.philosophize();
+        if (population.getHappiness() >= 10) {
+            population.decreaseHappiness(10);
+            technology.philosophize();
+        }
     }
 }
