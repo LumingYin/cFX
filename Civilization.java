@@ -1,20 +1,22 @@
+// This is the HW0 file. 
+// Checkstyle should not be required per CS1331.gatech.edu
+
 import java.util.Scanner;
-import java.lang.Math;
 
 public class Civilization {
-    static String userName = new String();
-    static boolean playing = true;
+    private static String userName = new String();
+    private static boolean playing = true;
 
     // User's properties
-    static String cities[] = new String[5];
-    static int cachedNumberOfCities = 0;
-    static int numberOfAttacks = 0;
-    static double gold = 20.5;
-    static double resources = 30;
-    static int happiness = 10;
-    static int millitaryUnits = 0;
-    static int technology = 0;
-    static boolean isFirstRun = true;
+    private static String[] cities = new String[5];
+    private static int cachedNumberOfCities = 0;
+    private static int numberOfAttacks = 0;
+    private static double gold = 20.5;
+    private static double resources = 30;
+    private static int happiness = 10;
+    private static int millitaryUnits = 0;
+    private static int technology = 0;
+    private static boolean isFirstRun = true;
 
     public static void main(String[] args) {
         while (playing) {
@@ -33,6 +35,7 @@ public class Civilization {
         try {
             System.in.read();
         } catch (Exception e) {
+            System.out.println("Try again?");
         }
     }
 
@@ -41,6 +44,7 @@ public class Civilization {
         try {
             System.in.read();
         } catch (Exception e) {
+            System.out.println("Try again?");
         }
         selectPerformableAction();
         userName = null;
@@ -99,8 +103,7 @@ public class Civilization {
         System.out.printf("To help you get started, you are provided with 20.5 Gold, 30 Resources and 10 Happiness.");
         reviewCurrentAssets();
         System.out.printf("Now, it's time to settle your first city!\n");
-        System.out.printf(
-                "The first city you settle will be free. After you successfully settle your first city, you will recieve 3 gold for the city.\n");
+        System.out.printf("The first city you settle will be free. After you successfully settle your first city, you will recieve 3 gold for the city.\n");
         settleCity();
     }
 
@@ -209,7 +212,7 @@ public class Civilization {
                 Scanner sc = new Scanner(System.in);
                 String cityName = sc.nextLine();
                 cities[numberOfCities()] = cityName;
-                if (isFirstRun == true) {
+                if (isFirstRun) {
                     isFirstRun = false;
                 } else {
                     gold = gold - 15.5;

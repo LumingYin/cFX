@@ -22,6 +22,7 @@ public class Technology {
     }
 
     private void updateFoundMeaningOfLife() {
+        // "surpasses" indicates 200 is not included
         if (understanding > 200) {
             foundMeaningOfLife = true;
         }
@@ -33,6 +34,7 @@ public class Technology {
     }
 
     private void updateBuiltWonderOfTheWorld() {
+        // "surpasses" indicates 200 is not included
         if (experienceLevel > 200) {
             builtWonderOfTheWorld = true;
         }
