@@ -76,7 +76,8 @@ public class QinDynasty {
     }
 
     public boolean buildWall(Settlement s) {
-        if (this.getNumSettlements() < 10 && s.build(treasury.getCoins(), population, 1000, 100)) {
+        if (this.getNumSettlements() < 10
+            && s.build(treasury.getCoins(), population, 1000, 100)) {
             technology.increaseExperience(10);
             treasury.spend(1000);
             population.canWork(100);
@@ -88,7 +89,8 @@ public class QinDynasty {
 
 
     public boolean buildHouse(Settlement s) {
-        if (this.getNumSettlements() < 10 && s.build(treasury.getCoins(), population, 30, 8)) {
+        if (this.getNumSettlements() < 10
+            && s.build(treasury.getCoins(), population, 30, 8)) {
             technology.increaseExperience(10);
             treasury.spend(30);
             population.canWork(8);

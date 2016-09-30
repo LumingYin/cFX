@@ -76,7 +76,8 @@ public class RomanEmpire {
     }
 
     public boolean buildAqueduct(Settlement s) {
-        if (getNumSettlements() < 10 && s.build(treasury.getCoins(), population, 250, 130)) {
+        if (getNumSettlements() < 10
+            && s.build(treasury.getCoins(), population, 250, 130)) {
             technology.increaseExperience(10);
             population.canWork(130);
             treasury.spend(250);
@@ -87,7 +88,8 @@ public class RomanEmpire {
     }
 
     public boolean buildBathHouse(Settlement s) {
-        if (getNumSettlements() < 10 && s.build(treasury.getCoins(), population, 110, 20)) {
+        if (getNumSettlements() < 10
+            && s.build(treasury.getCoins(), population, 110, 20)) {
             technology.increaseExperience(10);
             treasury.spend(110);
             population.canWork(20);
