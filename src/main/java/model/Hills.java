@@ -1,6 +1,8 @@
+package model;
+
 import java.util.Random;
 
-public class Hills {
+class Hills {
     private static Random rand = new Random();
 
     private Game[] game;

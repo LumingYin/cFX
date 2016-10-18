@@ -1,4 +1,6 @@
-public class Fish {
+package model;
+
+class Fish {
     private int healthIncrease;
 
     public Fish(int health) {
@@ -12,5 +14,4 @@ public class Fish {
     public int getHealth() {
         return healthIncrease;
     }
-
 }
