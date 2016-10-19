@@ -1,10 +1,11 @@
 package model;
 
 class Egypt extends Civilization {
-    private Desert desert = new Desert();
+    private Desert desert;
 
     public Egypt() {
         super("Egypt");
+        desert = new Desert();
     }
 
     public Desert getDesert() {

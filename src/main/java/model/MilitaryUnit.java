@@ -9,7 +9,6 @@ public abstract class MilitaryUnit extends Unit {
         super(health, c, baseEndurance, pay, initialGoldCost,
             initialFoodCost, initialResourceCost, 10);
         this.damage = damage;
-        this.tick();
     }
 
     public int getDamage() {
@@ -29,9 +28,11 @@ public abstract class MilitaryUnit extends Unit {
     abstract void battle(MapObject m);
 
     public void attack(MapObject m) {
-        getOwner().getStrategy().battle();
-        battle(m);
-        setCanAttack(false);
+        if (getCanAttack()) {
+            getOwner().getStrategy().battle();
+            battle(m);
+            setCanAttack(false);            
+        }
     }
 
     @Override

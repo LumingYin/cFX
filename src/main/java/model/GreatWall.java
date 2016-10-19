@@ -1,10 +1,11 @@
 package model;
 
 class GreatWall extends Landmark {
-    private boolean isFirstRun = true;
+    private boolean isFirstRun;
 
     public GreatWall(Civilization c) {
         super(c);
+        isFirstRun = true;
     }
 
     @Override

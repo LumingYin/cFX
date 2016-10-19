@@ -232,6 +232,9 @@ public class Model {
                 if (mapobj.isDestroyed()) {
                     tile.setOccupant(null);
                 }
+                if (((MilitaryUnit) (selected.getOccupant())).isDestroyed()) {
+                    selected.setOccupant(null);
+                }
                 return true;
             }
         }

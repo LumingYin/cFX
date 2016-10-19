@@ -1,12 +1,12 @@
 package model;
 
 class Pyramid extends Landmark {
+    private boolean isFirstRun;
 
     public Pyramid(Civilization c) {
         super(c);
+        isFirstRun = true;
     }
-
-    private boolean isFirstRun = true;
 
     @Override
     public void invest() {

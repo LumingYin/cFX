@@ -14,9 +14,9 @@ class QinDynasty extends Civilization {
     @Override
     public String explore() {
         hills.replenishGame();
-        int minedCoal = hills.mineCoal();
-        makeFood(minedCoal);
-        return "You mined the coal and acquired " + minedCoal + " coal!";
+        int foundFood = hills.hunt().getHealth();
+        makeFood(foundFood);
+        return "You explored the hills and acquired " + foundFood + " food!";
     }
 
     @Override

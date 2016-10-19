@@ -25,7 +25,7 @@ public class SiegeUnit extends MilitaryUnit implements Symbolizable {
     @Override
     public void attack(MapObject m) {
         getOwner().getStrategy().siege();
-        // siege(m);
+        battle(m);
         setCanAttack(false);
     }
 

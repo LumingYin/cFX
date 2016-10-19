@@ -1,16 +1,16 @@
 package model;
 
 public class SettlerUnit extends Unit implements Convertable {
-    private String nameOfTownToSettle;
+    private String townName;
 
-    public SettlerUnit(Civilization owner, String nameOfTownToSettle) {
+    public SettlerUnit(Civilization owner, String townName) {
         super(owner);
-        this.nameOfTownToSettle = nameOfTownToSettle;
+        this.townName = townName;
     }
 
     public Building convert() {
         this.getOwner().incrementNumSettlements();
-        return this.getOwner().getSettlement(nameOfTownToSettle);
+        return this.getOwner().getSettlement(townName);
     }
 
     public char symbol() {
@@ -25,6 +25,6 @@ public class SettlerUnit extends Unit implements Convertable {
     }
 
     public String toString() {
-        return "Settlers of " + nameOfTownToSettle + ". " + super.toString();
+        return "Settlers of " + townName + ". " + super.toString();
     }
 }

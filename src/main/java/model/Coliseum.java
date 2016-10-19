@@ -1,11 +1,12 @@
 package model;
 
 class Coliseum extends Landmark {
+    private boolean isFirstRun;
+
     public Coliseum(Civilization c) {
         super(c);
+        isFirstRun = true;
     }
-
-    private boolean isFirstRun = true;
 
     @Override
     public void invest() {
