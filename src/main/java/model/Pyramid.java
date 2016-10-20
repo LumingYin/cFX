@@ -13,6 +13,7 @@ class Pyramid extends Landmark {
         super.invest();
         if (isFirstRun) {
             getOwner().getTechnology().philosophize();
+            System.out.println(getOwner().getTechnology().getUnderstanding());
             isFirstRun = false;
         }
     }

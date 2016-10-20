@@ -16,7 +16,8 @@ class QinDynasty extends Civilization {
         hills.replenishGame();
         int foundFood = hills.hunt().getHealth();
         makeFood(foundFood);
-        return "You explored the hills and acquired " + foundFood + " food!";
+        return "You explored the hills and acquired " + foundFood
+            + " health, which translates to food!";
     }
 
     @Override

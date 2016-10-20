@@ -31,7 +31,7 @@ public abstract class MilitaryUnit extends Unit {
         if (getCanAttack()) {
             getOwner().getStrategy().battle();
             battle(m);
-            setCanAttack(false);            
+            setCanAttack(false);
         }
     }
 
