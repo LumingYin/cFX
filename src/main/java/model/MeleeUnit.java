@@ -1,6 +1,6 @@
 package model;
 
-public class MeleeUnit extends MilitaryUnit implements Symbolizable {
+class MeleeUnit extends MilitaryUnit implements Symbolizable {
     public MeleeUnit(Civilization c) {
         super(100, c, 10, 10, 14, 5, 0, 30);
     }

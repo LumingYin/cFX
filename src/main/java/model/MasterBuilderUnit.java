@@ -1,6 +1,6 @@
 package model;
 
-public class MasterBuilderUnit extends Unit implements Convertable {
+class MasterBuilderUnit extends Unit implements Convertable {
     public MasterBuilderUnit(Civilization owner) {
         super(owner);
     }

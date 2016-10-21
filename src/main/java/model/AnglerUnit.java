@@ -1,6 +1,6 @@
 package model;
 
-public class AnglerUnit extends Unit implements Convertable {
+class AnglerUnit extends Unit implements Convertable {
     public AnglerUnit(Civilization owner) {
         super(owner);
     }

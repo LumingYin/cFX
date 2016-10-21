@@ -1,6 +1,6 @@
 package model;
 
-public class BlackPowderUnit extends SiegeUnit {
+class BlackPowderUnit extends SiegeUnit {
 
     public BlackPowderUnit(Civilization c) {
         super(c);

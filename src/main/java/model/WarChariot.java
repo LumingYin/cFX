@@ -1,6 +1,6 @@
 package model;
 
-public class WarChariot extends RangedUnit {
+class WarChariot extends RangedUnit {
 
     public WarChariot(Civilization c) {
         super(c);

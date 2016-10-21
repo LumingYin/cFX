@@ -1,6 +1,6 @@
 package model;
 
-public class LegionUnit extends MeleeUnit {
+class LegionUnit extends MeleeUnit {
     public LegionUnit(Civilization owner) {
         super(owner);
         setDamage((int) (1.5 * getDamage()));

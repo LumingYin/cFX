@@ -1,6 +1,6 @@
 package model;
 
-public abstract class MilitaryUnit extends Unit {
+abstract class MilitaryUnit extends Unit {
     private int damage;
 
     public MilitaryUnit(int health, Civilization c, int baseEndurance,

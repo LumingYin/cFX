@@ -1,6 +1,6 @@
 package model;
 
-public class SettlerUnit extends Unit implements Convertable {
+class SettlerUnit extends Unit implements Convertable {
     private String townName;
 
     public SettlerUnit(Civilization owner, String townName) {

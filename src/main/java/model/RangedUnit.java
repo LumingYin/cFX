@@ -1,6 +1,6 @@
 package model;
 
-public class RangedUnit extends MilitaryUnit implements Symbolizable {
+class RangedUnit extends MilitaryUnit implements Symbolizable {
     public RangedUnit(Civilization c) {
         super(100, c, 10, 10, 14, 5, 0, 30);
     }
