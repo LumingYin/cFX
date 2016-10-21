@@ -11,14 +11,6 @@ public class BlackPowderUnit extends SiegeUnit {
         m.damage(this.getDamage());
     }
 
-    // // do they mean override siege or attack?
-    // @Override
-    // public void attack(MapObject m) {
-    //     getOwner().getStrategy().siege();
-    //     // siege(m);
-    //     // setCanAttack(false);
-    // }
-
     @Override
         public char symbol() {
         return 'B';

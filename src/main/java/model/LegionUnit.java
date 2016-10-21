@@ -9,7 +9,7 @@ public class LegionUnit extends MeleeUnit {
     @Override
     public void battle(MapObject m) {
         m.damage(this.getDamage());
-        if (!m.isDestroyed() && (!(m instanceof HybridUnit))) {
+        if (!m.isDestroyed() && (m instanceof MeleeUnit)) {
             damage(((MilitaryUnit) m).getDamage());
         }
     }

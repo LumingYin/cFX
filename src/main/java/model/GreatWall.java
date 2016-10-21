@@ -19,6 +19,6 @@ class GreatWall extends Landmark {
 
     @Override
     public String toString() {
-        return "GreatWall. " + super.toString();
+        return "Great Wall. " + super.toString();
     }
 }
