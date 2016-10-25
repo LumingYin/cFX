@@ -1,16 +1,28 @@
 package model;
 
-class RangedUnit extends MilitaryUnit implements Symbolizable {
-    public RangedUnit(Civilization c) {
-        super(100, c, 10, 10, 14, 5, 0, 30);
+/**
+ * Represents a Ranged unit.
+ *
+ * @version 1.0
+ * @author Jim Harris
+ */
+class RangedUnit extends MilitaryUnit {
+
+    /**
+     * Public constructor.
+     *
+     * @param owner the owner of this unit.
+     */
+    public RangedUnit(Civilization owner) {
+        super(100, owner, 10, 10, 14, 5, 0, 30);
     }
 
     @Override
-    public void battle(MapObject m) {
-        m.damage(this.getDamage());
-        if (!m.isDestroyed() && (m instanceof RangedUnit
-            || m instanceof HybridUnit)) {
-            damage(((MilitaryUnit) m).getDamage());
+    public void battle(MapObject o) {
+        o.damage(this.getDamage());
+        if (!o.isDestroyed() && o instanceof RangedUnit
+            || o instanceof HybridUnit) {
+            damage(((MilitaryUnit) o).getDamage());
         }
     }
 
@@ -19,9 +31,9 @@ class RangedUnit extends MilitaryUnit implements Symbolizable {
         return 'R';
     }
 
+
     @Override
     public String toString() {
         return "Ranged Unit. " + super.toString();
     }
-
 }

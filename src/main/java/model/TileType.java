@@ -1,5 +1,11 @@
 package model;
 
+/**
+ * An enum representing the terrain type of a TerrainTile.
+ *
+ * @version 1.0
+ * @author Jim Harris
+ */
 enum TileType {
 
     PLAINS('P', "Plains", 1),
@@ -13,20 +19,36 @@ enum TileType {
     private String name;
     private int cost;
 
+    /**
+     * Public constructor.
+     *
+     * @param symbol the symbol to represent this kind of tile.
+     * @param name the name of this kind of terrain.
+     * @param cost the endurance needed to traverse this kind of tile.
+     */
     private TileType(char symbol, String name, int cost) {
         this.symbol = symbol;
         this.name = name;
         this.cost = cost;
     }
 
+    /**
+     * @return the symbol for this kind of tile.
+     */
     public char getSymbol() {
         return this.symbol;
     }
 
+    /**
+     * @return a String representing the name of this tile type.
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * @return an int representing the cost to move over this kind of tile.
+     */
     public int getCost() {
         return this.cost;
     }

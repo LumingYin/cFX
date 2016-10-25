@@ -1,26 +1,39 @@
 package model;
 
+/**
+ * Represents a Coal Miner unit that can build a coal mine.
+ *
+ * @author Jim Harris
+ * @version 1.0
+ */
 class CoalMinerUnit extends Unit implements Convertable {
+
+    /**
+     * Public constructor
+     *
+     * @param owner The owner of this unit.
+     */
     public CoalMinerUnit(Civilization owner) {
         super(owner);
     }
 
+    @Override
     public Building convert() {
-        return this.getOwner().getCoalMine();
+        return getOwner().getCoalMine();
     }
 
+    @Override
+    public boolean canConvert(TileType type) {
+        return type == TileType.HILLS;
+    }
+
+    @Override
     public char symbol() {
         return 'c';
     }
 
-    public boolean canConvert(TileType type) {
-        if (type == TileType.HILLS) {
-            return true;
-        }
-        return false;
-    }
-
+    @Override
     public String toString() {
-        return "Coal Miners. " + super.toString();
+        return "Coal miners. " + super.toString();
     }
 }

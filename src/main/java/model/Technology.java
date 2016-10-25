@@ -1,49 +1,123 @@
 package model;
 
+/**
+ * Holds all the Technology information for a Civilization
+ *
+ * @author Ryan Voor
+ * @version 2.0
+ */
 class Technology {
 
-    private int buildExperience;
-    private boolean builtWonderOfTheWorld;
+    private int techPoints;
+    private SimpleSet<Skill> skills;
 
-    private int understanding;
-    private boolean foundMeaningOfLife;
-
-    public int getUnderstanding() {
-        return understanding;
+    /**
+     * Constructs a new Technology object
+     * initializes techPoints to 0 and
+     * initializes skills to an empty MySet of Skills.
+     */
+    public Technology() {
+        techPoints = 0;
+        skills = new MySet<>();
     }
 
-    public int getBuildExperience() {
-        return buildExperience;
+    /**
+     * Increments techPoints and adds a new
+     * Skill to the techs set. The Skill that is added
+     * should be random (HINT: take a look at the Skill.getRandomSkill()
+     * method in the Skill class)
+     */
+    public void gainATech() {
+        techPoints++;
+        Skill newSkill = Skill.getRandomSkill();
+        while (skills.contains(newSkill)) {
+            newSkill = Skill.getRandomSkill();
+        }
+        skills.add(newSkill);
     }
 
-    public void increaseBuildExperience() {
-        buildExperience += 20;
-        builtWonderOfTheWorld = (buildExperience >= 200);
+    /**
+     * Getter for the techPoints of this Civilization
+     * @return int the techPoints of this Civilization
+     */
+    public int getTechPoints() {
+        return techPoints;
     }
 
-    public void increaseBuildExperience(int i) {
-        buildExperience += i;
-        builtWonderOfTheWorld = (buildExperience >= 200);
+    /**
+     * Getter for the skills of this Civilization
+     * @return SimpleSet of Skills this Civilization
+     */
+    public SimpleSet<Skill> getSkills() {
+        return skills;
     }
 
-    public boolean builtWonderOfTheWorld() {
-        return builtWonderOfTheWorld;
-    }
-
-    public void increaseUnderstanding(int increase) {
-        understanding += increase;
-        foundMeaningOfLife = (understanding >= 200);
-    }
-
-    public void philosophize() {
-        increaseUnderstanding(25);
-    }
-
-    public void improveWriting() {
-        increaseUnderstanding(10);
-    }
-
+    /**
+     * Returns whether this Civilization has achieved a Technology win
+     * @return boolean whether this Civilization has achieved 20 techPoints
+     */
     public boolean hasTechnologyWin() {
-        return builtWonderOfTheWorld || foundMeaningOfLife;
+        return techPoints >= 20;
+    }
+
+    /**
+     * @return an int representing the amount of understanding.
+     */
+    public int getUnderstanding() {
+        return getTechPoints();
+    }
+
+    /**
+     * @return an int representing the amount of build experience.
+     */
+    public int getBuildExperience() {
+        return getTechPoints();
+    }
+
+    /**
+     * Adds a technical skill.
+     */
+    public void increaseBuildExperience() {
+        gainATech();
+    }
+
+    /**
+     * Adds a technical skill.
+     *
+     * @param i HAH
+     */
+    public void increaseBuildExperience(int i) {
+        gainATech();
+    }
+
+    /**
+     * @return a boolean representing whether or not the player has built a
+     * nifty tourist attraction.
+     */
+    public boolean builtWonderOfTheWorld() {
+        return techPoints >= 10;
+    }
+
+    /**
+     * Increases understanding by a specified amount.
+     *
+     * @param increase HAH
+     */
+    public void increaseUnderstanding(int increase) {
+        gainATech();
+    }
+
+    /**
+     * Adds a technical skill.
+     */
+    public void philosophize() {
+        gainATech();
+    }
+
+    /**
+     * Adds a technical skill.
+     */
+    public void improveWriting() {
+        gainATech();
     }
 }

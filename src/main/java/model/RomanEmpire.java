@@ -1,13 +1,31 @@
 package model;
 
+/**
+ * Represents the Roman Empire civilization.
+ *
+ * @version 2.0
+ * @author Angie Palm, Jim Harris
+ */
 class RomanEmpire extends Civilization {
-    private Hills hills;
+    private Hills hills = new Hills();
 
+    /**
+     * Public constructor.
+     */
     public RomanEmpire() {
         super("Roman Empire");
-        hills = new Hills();
     }
 
+    @Override
+    public String explore() {
+        int resources = hills.mineCoal();
+        produceResources(resources);
+        return "You go mining and get " + resources + " resources!";
+    }
+
+    /**
+     * @return the Hills for this Civilization.
+     */
     public Hills getHills() {
         return hills;
     }
@@ -20,14 +38,6 @@ class RomanEmpire extends Civilization {
     @Override
     public Landmark getLandmark() {
         return new Coliseum(this);
-    }
-
-    @Override
-    public String explore() {
-        hills.replenishGame();
-        int minedCoal = hills.mineCoal();
-        super.produceResources(minedCoal);
-        return "You mined the coal and acquired " + minedCoal + " coal!";
     }
 
 }
