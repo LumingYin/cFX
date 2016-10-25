@@ -3,13 +3,12 @@ import java.util.Random;
 
 class MySet<E> implements SimpleSet<E> {
     private E[] array;
-    private int supposedIndexForNewElement;
+    private int size;
 
     // Constructor
-
     public MySet() {
         array = (E[]) new Object[1];
-        this.supposedIndexForNewElement = 0;
+        this.size = 0;
     }
 
     // These are private methods to help with the expansion and sorting of array
@@ -22,7 +21,7 @@ class MySet<E> implements SimpleSet<E> {
     }
 
     public void sortArray() {
-        if (supposedIndexForNewElement >= array.length) {
+        if (size >= array.length) {
             expandArray();
         }
         for (int i = 0; i < array.length - 1; i++) {
@@ -37,18 +36,17 @@ class MySet<E> implements SimpleSet<E> {
                 tempActualElementInArray++;
             }
         }
-        supposedIndexForNewElement = tempActualElementInArray;
+        size = tempActualElementInArray;
     }
 
     // These are public methods to manipulate the set
-
     public boolean add(E e) {
         if (contains(e)) {
             return false;
         }
         sortArray();
-        array[supposedIndexForNewElement] = e;
-        supposedIndexForNewElement++;
+        array[size] = e;
+        size++;
         return true;
     }
 
@@ -87,7 +85,8 @@ class MySet<E> implements SimpleSet<E> {
      */
     public boolean contains(E e) {
         for (E item:array) {
-            if (item == e) {
+            // if (item == e) {
+            if (item != null && item.equals(e)) {
                 return true;
             }
         }
@@ -117,7 +116,7 @@ class MySet<E> implements SimpleSet<E> {
         for (E item:array) {
             item = null;
         }
-        supposedIndexForNewElement = 0;
+        size = 0;
     }
 
     /**
@@ -126,7 +125,7 @@ class MySet<E> implements SimpleSet<E> {
      */
     public int size() {
         sortArray();
-        return supposedIndexForNewElement;
+        return size;
     }
 
     public boolean isEmpty() {
@@ -157,7 +156,7 @@ class MySet<E> implements SimpleSet<E> {
                 + "element to return, since the set is empty.");
         }
         Random rn = new Random();
-        int randomNumber = rn.nextInt(supposedIndexForNewElement);
+        int randomNumber = rn.nextInt(size);
         return array[randomNumber];
     }
 
@@ -169,8 +168,7 @@ class MySet<E> implements SimpleSet<E> {
      */
     public E[] toArray() {
         sortArray();
-        int size = supposedIndexForNewElement;
-        E[] toBeReturned = (E[]) new Object[supposedIndexForNewElement];
+        E[] toBeReturned = (E[]) new Object[size];
         for (int i = 0; i < size; i++) {
             toBeReturned[i] = array[i];
         }
@@ -186,8 +184,8 @@ class MySet<E> implements SimpleSet<E> {
     @Override
     public String toString() {
         String compositedString = "";
-        for (int i = 0; i < supposedIndexForNewElement; i++) {
-            if (i < supposedIndexForNewElement - 1) {
+        for (int i = 0; i < size; i++) {
+            if (i < size - 1) {
                 compositedString += (array[i].toString() + ", ");
             }
             compositedString += array[i].toString();
