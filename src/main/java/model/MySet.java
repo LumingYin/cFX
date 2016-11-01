@@ -2,13 +2,31 @@ package model;
 import java.util.Random;
 
 class MySet<E> implements SimpleSet<E> {
+
+
     private E[] array;
     private int size;
+    private boolean hasNullInSet;
 
     // Constructor
     public MySet() {
+        hasNullInSet = false;
         array = (E[]) new Object[1];
         this.size = 0;
+    }
+
+    // Debug SOPs
+    public void debug() {
+        System.out.println();
+        System.out.println("Printing debug info:");
+        System.out.println("Private Array Length: " + array.length);
+        System.out.println("Private Size Variable: " + size);
+        System.out.println("Public size() returns: " + size());
+        System.out.println("hasNullInSet: " + hasNullInSet);
+        for (int  i = 0; i < array.length; i++) {
+            System.out.println("[" + i + "]: " + array[i]);
+        }
+        System.out.println();
     }
 
     // These are private methods to help with the expansion and sorting of array
@@ -20,7 +38,7 @@ class MySet<E> implements SimpleSet<E> {
         array = tempArray;
     }
 
-    public void sortArray() {
+    private void sortArray() {
         if (size >= array.length) {
             expandArray();
         }
@@ -41,13 +59,19 @@ class MySet<E> implements SimpleSet<E> {
 
     // These are public methods to manipulate the set
     public boolean add(E e) {
-        if (contains(e)) {
+        if (e == null && !hasNullInSet) {
+            hasNullInSet = true;
+            return true;
+        } else if (e == null && hasNullInSet) {
             return false;
+        } else {
+            if (contains(e)) {
+                return false;
+            }
+            sortArray();
+            array[size++] = e;
+            return true;
         }
-        sortArray();
-        array[size] = e;
-        size++;
-        return true;
     }
 
     /**
@@ -59,6 +83,15 @@ class MySet<E> implements SimpleSet<E> {
      */
     public E remove(E e) throws ElementDoesNotExistException {
         E passedInElement = e;
+        if (passedInElement == null) {
+            if (hasNullInSet) {
+                hasNullInSet = false;
+                return passedInElement;
+            } else {
+                throw new ElementDoesNotExistException("Element "
+                    + "does not exist in set!");
+            }
+        }
         boolean doesNotExist = true;
         for (int i = 0; i < array.length; i++) {
             if (array[i] == passedInElement) {
@@ -84,8 +117,13 @@ class MySet<E> implements SimpleSet<E> {
      * in the set
      */
     public boolean contains(E e) {
+        if (e == null) {
+            if (hasNullInSet) {
+                return true;
+            }
+            return false;
+        }
         for (E item:array) {
-            // if (item == e) {
             if (item != null && item.equals(e)) {
                 return true;
             }
@@ -104,6 +142,14 @@ class MySet<E> implements SimpleSet<E> {
      */
     public E[] removeAll(E[] e) throws ElementDoesNotExistException {
         for (E content:e) {
+            if (!contains(content)) {
+                throw new ElementDoesNotExistException("Because "
+                + "one of the elements passed in by the array do "
+                + "not exist in the set, none of the passed in "
+                + "elements will be removed.", content);
+            }
+        }
+        for (E content:e) {
             this.remove(content);
         }
         return e;
@@ -113,9 +159,10 @@ class MySet<E> implements SimpleSet<E> {
      * Removes all elements from the set.
      */
     public void clear() {
-        for (E item:array) {
-            item = null;
+        for (int i = 0; i < array.length; i++) {
+            array[i] = null;
         }
+        hasNullInSet = false;
         size = 0;
     }
 
@@ -125,10 +172,16 @@ class MySet<E> implements SimpleSet<E> {
      */
     public int size() {
         sortArray();
+        if (hasNullInSet) {
+            return size + 1;
+        }
         return size;
     }
 
     public boolean isEmpty() {
+        if (hasNullInSet) {
+            return false;
+        }
         boolean isEmpty = true;
         for (E item:array) {
             if (item != null) {
@@ -156,7 +209,15 @@ class MySet<E> implements SimpleSet<E> {
                 + "element to return, since the set is empty.");
         }
         Random rn = new Random();
-        int randomNumber = rn.nextInt(size);
+        int randomNumber;
+        if (hasNullInSet) {
+            randomNumber = rn.nextInt(size + 1);
+        } else {
+            randomNumber = rn.nextInt(size);
+        }
+        if (randomNumber == size + 1) {
+            return null;
+        }
         return array[randomNumber];
     }
 
@@ -168,7 +229,12 @@ class MySet<E> implements SimpleSet<E> {
      */
     public E[] toArray() {
         sortArray();
-        E[] toBeReturned = (E[]) new Object[size];
+        E[] toBeReturned;
+        if (hasNullInSet) {
+            toBeReturned = (E[]) new Object[size + 1];
+        } else {
+            toBeReturned = (E[]) new Object[size];
+        }
         for (int i = 0; i < size; i++) {
             toBeReturned[i] = array[i];
         }
@@ -187,8 +253,16 @@ class MySet<E> implements SimpleSet<E> {
         for (int i = 0; i < size; i++) {
             if (i < size - 1) {
                 compositedString += (array[i].toString() + ", ");
+            } else {
+                compositedString += array[i].toString();
             }
-            compositedString += array[i].toString();
+        }
+        if (hasNullInSet) {
+            if (!compositedString.equals("")) {
+                compositedString += ", null";
+            } else {
+                compositedString += "null";
+            }
         }
         return compositedString;
     }

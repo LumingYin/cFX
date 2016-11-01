@@ -26,7 +26,9 @@ class FishingShack extends Building {
         replenishFish();
         int foodGeneration = 0;
         int goldGeneration = 0;
-        for (Fish f : fish.toArray()) {
+        Object[] fishes = fish.toArray();
+        for (Object o : fishes) {
+            Fish f = (Fish) o;
             foodGeneration += (int) (f.getHealth() / 2);
             goldGeneration += f.getHealth() - foodGeneration;
         }
@@ -78,6 +80,7 @@ class FishingShack extends Building {
         }
         return false;
     }
+
 
     @Override
     public String toString() {
