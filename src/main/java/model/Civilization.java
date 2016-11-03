@@ -273,4 +273,9 @@ class Civilization {
     public Landmark getLandmark() {
         return new Landmark(this);
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

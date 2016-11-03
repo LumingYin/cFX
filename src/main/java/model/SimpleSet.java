@@ -7,7 +7,7 @@ package model;
  * @author Ryan Voor
  * @version 1.0
  */
-interface SimpleSet<E> {
+interface SimpleSet<E> extends Iterable<E> {
 
     /**
      * Adds the passed in element to the set.
@@ -36,11 +36,11 @@ interface SimpleSet<E> {
     boolean contains(E e);
 
     /**
-     * removes all the passed in elements from the set then returns them
-     * throws a ElementDoesNotExistException if one of the passed in elements
+     * Removes all the passed in elements from the set then returns them.
+     * Throws a ElementDoesNotExistException if one of the passed in elements
      * is not in the set.
-     * NOTE: this method should not remove ANY elements from the set
-     * if it throws a ElementDoesNotExistException
+     * NOTE: This method should not remove ANY elements from the set
+     * if it throws a NoSuchElementException.
      * @param e the elements to be removed from the set
      * @return E[] the elements that were removed from the set
      */

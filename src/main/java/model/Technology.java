@@ -24,17 +24,14 @@ class Technology {
     /**
      * Increments techPoints and adds a new
      * Skill to the techs set. The Skill that is added
-     * should be random (HINT: take a look at the Skill.getRandomSkill()
+     * should be random (HINT: take a look at the getRandomSkill()
      * method in the Skill class)
      */
     public void gainATech() {
-        if (skills.size() < 20) {
-            techPoints++;
-            Skill newSkill = Skill.getRandomSkill();
-            while (skills.contains(newSkill)) {
-                newSkill = Skill.getRandomSkill();
-            }
-            skills.add(newSkill);
+        techPoints++;
+        boolean looping = true;
+        while (looping) {
+            looping = !skills.add(Skill.getRandomSkill());
         }
     }
 

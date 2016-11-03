@@ -33,6 +33,9 @@ public class GameController {
             UI.explore();
             break;
         case 3:
+            UI.standings();
+            break;
+        case 4:
             end();
             break;
         default:
@@ -92,4 +95,7 @@ public class GameController {
         return Model.demolishSelected();
     }
 
+    public static void standings(int choice) {
+        Model.standings(choice);
+    }
 }

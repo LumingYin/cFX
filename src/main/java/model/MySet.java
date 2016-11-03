@@ -1,202 +1,192 @@
 package model;
-import java.util.Random;
-@SuppressWarnings("unchecked")
 
+import java.util.Random;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+/**
+ * Represents a custom Set data structure.
+ *
+ * @author Ryan Voor
+ * @version 1.0
+ */
 class MySet<E> implements SimpleSet<E> {
 
+    private E[] data;
+    private int numElements;
+    private final int startingSize = 5;
 
-    private E[] array;
-    private int size;
-    private boolean hasNullInSet;
+    private class MySetIterator implements Iterator<E> {
+        private int cursor = 0;
 
-    // Constructor
+        public boolean hasNext() {
+            return cursor < numElements;
+        }
+
+        public E next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            return data[cursor++];
+        }
+
+        public void remove() {
+            try {
+                MySet.this.remove(data[cursor - 1]);
+            } catch (ElementDoesNotExistException e) {
+                // Do nothing per instruction on Piazza
+                // Adding a print() statement that prints nothing in
+                // order to stop checkstyle from prompting style error
+                System.out.print("");
+            }
+        }
+    }
+
+    // Debug SOPs
+    public void debug() {
+        System.out.println();
+        System.out.println("Printing debug info:");
+        System.out.println("Private Array Length: " + data.length);
+        System.out.println("Private numElements/Public size(): " + numElements);
+        for (int  i = 0; i < data.length; i++) {
+            System.out.println("[" + i + "]: " + data[i]);
+        }
+        System.out.println();
+    }
+    /**
+     * Public constructor.
+     */
+    @SuppressWarnings("unchecked")
     public MySet() {
-        hasNullInSet = false;
-        array = (E[]) new Object[1];
-        this.size = 0;
+        this.data = (E[]) new Object[startingSize];
+        this.numElements = 0;
     }
 
-    // These are private methods to help with the expansion and sorting of array
-    private void expandArray() {
-        E[] tempArray = (E[]) new Object[array.length * 2];
-        for (int i = 0; i < array.length; i++) {
-            tempArray[i] = array[i];
-        }
-        array = tempArray;
+    public Iterator<E> iterator() {
+        return new MySetIterator();
     }
 
-    private void sortArray() {
-        if (size >= array.length) {
-            expandArray();
-        }
-        for (int i = 0; i < array.length - 1; i++) {
-            if (array[i] == null) {
-                array[i] = array[i + 1];
-                array[i + 1] = null;
-            }
-        }
-        int tempActualElementInArray = 0;
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] != null) {
-                tempActualElementInArray++;
-            }
-        }
-        size = tempActualElementInArray;
-    }
-
-    // These are public methods to manipulate the set
+    @Override
     public boolean add(E e) {
-        if (e == null && !hasNullInSet) {
-            hasNullInSet = true;
-            return true;
-        } else if (e == null && hasNullInSet) {
+        if (this.contains(e)) {
             return false;
-        } else {
-            if (contains(e)) {
-                return false;
-            }
-            sortArray();
-            array[size++] = e;
-            return true;
         }
+        if (numElements >= data.length) {
+            this.doubleBackingArray();
+        }
+        data[numElements++] = e;
+        return true;
     }
 
-    public E remove(E e) throws ElementDoesNotExistException {
-        E passedInElement = e;
-        if (passedInElement == null) {
-            if (hasNullInSet) {
-                hasNullInSet = false;
-                return passedInElement;
-            } else {
-                throw new ElementDoesNotExistException("Element "
-                    + "does not exist in set!");
-            }
-        }
-        boolean doesNotExist = true;
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] == passedInElement) {
-                array[i] = null;
-                doesNotExist = false;
-                sortArray();
-            }
-        }
-        if (doesNotExist) {
-            throw new ElementDoesNotExistException("Element "
-                + "does not exist in set!");
-        }
-        return passedInElement;
-    }
-
+    @Override
     public boolean contains(E e) {
-        if (e == null) {
-            if (hasNullInSet) {
-                return true;
-            }
-            return false;
-        }
-        for (E item:array) {
-            if (item != null && item.equals(e)) {
+        for (int i = 0; i < numElements; i++) {
+            if (data[i].equals(e)) {
                 return true;
             }
         }
         return false;
     }
 
-    public E[] removeAll(E[] e) throws ElementDoesNotExistException {
-        for (E content:e) {
-            if (!contains(content)) {
-                throw new ElementDoesNotExistException("Because "
-                + "one of the elements passed in by the array do "
-                + "not exist in the set, none of the passed in "
-                + "elements will be removed.", content);
+    @Override
+    public E remove(E e) throws ElementDoesNotExistException {
+        for (int i = 0; i < numElements; i++) {
+            if (data[i].equals(e)) {
+                E toBeReturned = data[i];
+                data[i] = null;
+                for (int j = i; j < numElements; j++) {
+                    data[j] = data[j + 1];
+                }
+                numElements--;
+                return toBeReturned;
             }
         }
-        for (E content:e) {
-            this.remove(content);
-        }
-        return e;
+        throw new ElementDoesNotExistException(
+            "Cannot remove an element that isn't in the set!", e);
     }
 
+    @Override
+    @SuppressWarnings("unchecked")
+    public E[] removeAll(E[] elements) throws ElementDoesNotExistException {
+        for (E element: elements) {
+            if (!this.contains(element)) {
+                throw new ElementDoesNotExistException("Attempted to remove "
+                    + element + " from set but it wasn't in the set!");
+            }
+        }
+        E[] results = (E[]) new Object[elements.length];
+        int counter = 0;
+        for (E element: elements) {
+            // this guard is in case there are duplicate elements in the
+            // parameter array
+            if (this.contains(element)) {
+                results[counter++] = this.remove(element);
+            }
+        }
+        return results;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
     public void clear() {
-        for (int i = 0; i < array.length; i++) {
-            array[i] = null;
-        }
-        hasNullInSet = false;
-        size = 0;
+        this.data = (E[]) new Object[startingSize];
+        this.numElements = 0;
     }
 
+    @Override
     public int size() {
-        sortArray();
-        if (hasNullInSet) {
-            return size + 1;
-        }
-        return size;
+        return numElements;
     }
 
+    @Override
     public boolean isEmpty() {
-        if (hasNullInSet) {
-            return false;
-        }
-        boolean isEmpty = true;
-        for (E item:array) {
-            if (item != null) {
-                isEmpty = false;
-                break;
-            }
-        }
-        return isEmpty;
+        return numElements == 0;
     }
 
+    @Override
     public E getRandomElement() throws ElementDoesNotExistException {
-        // sortArray();
-        if (isEmpty()) {
-            throw new ElementDoesNotExistException("There is no"
-                + "element to return, since the set is empty.");
+        if (this.isEmpty()) {
+            throw new ElementDoesNotExistException(
+                "Cannot get an element from a empty set!");
         }
-        Random rn = new Random();
-        int randomNumber;
-        if (hasNullInSet) {
-            randomNumber = rn.nextInt(size + 1);
-        } else {
-            randomNumber = rn.nextInt(size);
-        }
-        if (randomNumber == size + 1) {
-            return null;
-        }
-        return array[randomNumber];
+        Random rand = new Random();
+        return data[rand.nextInt(numElements)];
     }
 
+    @Override
+    @SuppressWarnings("unchecked")
     public E[] toArray() {
-        sortArray();
-        E[] toBeReturned;
-        if (hasNullInSet) {
-            toBeReturned = (E[]) new Object[size + 1];
-        } else {
-            toBeReturned = (E[]) new Object[size];
+        E[] result = (E[]) new Object[numElements];
+        for (int i = 0; i < numElements; i++) {
+            result[i] = data[i];
         }
-        for (int i = 0; i < size; i++) {
-            toBeReturned[i] = array[i];
-        }
-        return toBeReturned;
+        return result;
     }
 
     @Override
     public String toString() {
-        String compositedString = "";
-        for (int i = 0; i < size; i++) {
-            if (i < size - 1) {
-                compositedString += (array[i].toString() + ", ");
+        String result = "[";
+        for (int i = 0; i < numElements; i++) {
+            if (i == numElements - 1) {
+                result += "" + data[i];
             } else {
-                compositedString += array[i].toString();
+                result += "" + data[i] + ", ";
             }
         }
-        if (hasNullInSet) {
-            if (!compositedString.equals("")) {
-                compositedString += ", null";
-            } else {
-                compositedString += "null";
-            }
+        result += "]";
+        return result;
+    }
+
+    /**
+     * Doubles the size of the backing array while maintaining all of the
+     * elements in the SimpleSet.
+     */
+    @SuppressWarnings("unchecked")
+    private void doubleBackingArray() {
+        E[] newArray = (E[]) new Object[data.length * 2];
+        for (int i = 0; i < numElements; i++) {
+            newArray[i] = data[i];
         }
-        return compositedString;
+        data = newArray;
     }
 }

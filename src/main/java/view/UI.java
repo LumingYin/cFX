@@ -34,7 +34,8 @@ public class UI {
             System.out.println("What would you like to do?\n"
                 + "1. Manage Units\n"
                 + "2. Explore\n"
-                + "3. Quit\n");
+                + "3. See Standings\n"
+                + "4. Quit\n");
             int response = scan.nextInt();
             scan.nextLine();
             GameController.turnOption(response);
@@ -190,5 +191,18 @@ public class UI {
 
     public static void explore() {
         System.out.println(GameController.explore());
+    }
+
+    public static void standings() {
+        System.out.println("You selected to see your standings\n"
+                + "Which standings would you like to know about?\n"
+                + "1. Military Strength\n"
+                + "2. Happiness\n"
+                + "3. Technology\n"
+                + "4. Production\n"
+                + "5. Overall prowess");
+        int response = scan.nextInt();
+        scan.nextLine();
+        GameController.standings(response);
     }
 }
