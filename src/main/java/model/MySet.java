@@ -32,12 +32,12 @@ class MySet<E> implements SimpleSet<E> {
 
         public void remove() {
             try {
+                if (cursor == 0) {
+                    throw new IllegalStateException();
+                }
                 MySet.this.remove(data[cursor - 1]);
             } catch (ElementDoesNotExistException e) {
-                // Do nothing per instruction on Piazza
-                // Adding a print() statement that prints nothing in
-                // order to stop checkstyle from prompting style error
-                System.out.print("");
+                System.out.println(e.getMessage());
             }
         }
     }
