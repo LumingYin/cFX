@@ -133,19 +133,11 @@ public class Model {
 
     public static void standings(int choice) {
         int i = 1;
-        Collections.sort(civs, (Civilization a, Civilization b) -> {
-                return ((Integer) (b.getStrategy().getStrategyLevel())).
-                compareTo((Integer) (a.getStrategy().getStrategyLevel()));
-            });
-
         switch (choice) {
         case 1:
             //Military Prowess
             System.out.println("People with the Pointiest Sticks:");
-            Collections.sort(civs, (Civilization a, Civilization b) -> {
-                    return ((Integer) (b.getStrategy().getStrategyLevel())).
-                    compareTo((Integer) (a.getStrategy().getStrategyLevel()));
-                });
+            Collections.sort(civs);
             Iterator it = civs.iterator();
             while (it.hasNext()) {
                 Civilization cz = (Civilization) (it.next());

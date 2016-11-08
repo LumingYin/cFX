@@ -32,10 +32,10 @@ class MySet<E> implements SimpleSet<E> {
 
         public void remove() {
             try {
-                if (cursor == 0) {
+                if (cursor <= 0) {
                     throw new IllegalStateException();
                 }
-                MySet.this.remove(data[cursor - 1]);
+                MySet.this.remove(data[--cursor]);
             } catch (ElementDoesNotExistException e) {
                 System.out.println(e.getMessage());
             }
@@ -94,7 +94,7 @@ class MySet<E> implements SimpleSet<E> {
             if (data[i].equals(e)) {
                 E toBeReturned = data[i];
                 data[i] = null;
-                for (int j = i; j < numElements; j++) {
+                for (int j = i; j < numElements - 1; j++) {
                     data[j] = data[j + 1];
                 }
                 numElements--;
