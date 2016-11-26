@@ -14,24 +14,19 @@ public class MilitaryMenu extends AbstractMenu {
     */
     public MilitaryMenu() {
         Button attack = new Button("Attack");
-    	Button move = new Button("Move");
+        Button move = new Button("Move");
 
-    	attack.setOnAction(event -> {
-            // if (GameController.getLastClicked().getTile().getOccupant().getOwner() == GameController.getCivilization()) {
-            //     showAlert("Cannot Attack", "You cannot attack yourself!");
-            // } else {
+        attack.setOnAction(event -> {
                 GameController.attacking();
-            // }
-            GridFX.update();
-    	});
+                GridFX.update();
+            });
 
-    	move.setOnAction(event -> {
-    		GameController.moving();
-            GridFX.update();
-    	});
+        move.setOnAction(event -> {
+                GameController.moving();
+                GridFX.update();
+            });
 
         addMenuItem(attack);
-    	addMenuItem(move);
-
+        addMenuItem(move);
     }
 }

@@ -4,12 +4,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
-import model.Civilization;
-import javafx.scene.image.ImageView;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
-
-
+import javafx.scene.image.ImageView;
 
 /**
  * Created by Tian-Yo Yang on 11/11/2016.
@@ -22,8 +19,8 @@ import javafx.collections.FXCollections;
  * 3. a Start button
  */
 public class StartScreen extends StackPane {
-    Button startButton;
-    ListView<CivEnum> civList;
+    private Button startButton;
+    private ListView<CivEnum> civList;
 
     /**
     * constuctor of the start screen. Should set the background
@@ -41,7 +38,8 @@ public class StartScreen extends StackPane {
 
         startButton = new Button("Start");
 
-        ObservableList<CivEnum> enumToUIList = FXCollections.observableArrayList(CivEnum.values());
+        ObservableList<CivEnum> enumToUIList = FXCollections.
+            observableArrayList(CivEnum.values());
         civList = new ListView();
         civList.setMaxSize(200, 100);
         civList.setItems(enumToUIList);
@@ -56,7 +54,7 @@ public class StartScreen extends StackPane {
         return startButton;
     }
     /**
-    * return a ListView of CivEnums representing the list of 
+    * return a ListView of CivEnums representing the list of
     * available civilizations to choose from
     * @return listview of CivEnum
     */

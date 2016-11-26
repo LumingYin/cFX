@@ -91,7 +91,7 @@ public class GameController {
         lastClicked.updateTileView();
         GameScreen.switchMenu(state);
     }
-    
+
     /**
      * Sets game state to ATTACKING (used as a transition state)
      */

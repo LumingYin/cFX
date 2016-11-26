@@ -2,21 +2,18 @@ package view;
 
 import controller.GameController;
 import javafx.scene.layout.BorderPane;
-import view.GridFX;
 import model.Map;
 import javafx.scene.layout.VBox;
-import javafx.geometry.Insets;
-
 
 /**
  * This class represents the GameScreen class
  */
 public class GameScreen extends BorderPane {
-    GridFX grid;
-    Map map;
-    static AbstractMenu statusMenu;
-    static ResourcesMenu resourcesMenu;
-    static VBox vbox;
+    private GridFX grid;
+    private Map map;
+    private static AbstractMenu statusMenu;
+    private static ResourcesMenu resourcesMenu;
+    private static VBox vbox;
 
     /**
      * Creates a new view into the game. this layout should include
@@ -42,7 +39,6 @@ public class GameScreen extends BorderPane {
     public void update() {
         GridFX.update();
         resourcesMenu.update();
-      //TODO
     }
     /**
     * this method should return the resource menu
@@ -60,20 +56,22 @@ public class GameScreen extends BorderPane {
      */
     public static void switchMenu(GameController.GameState state) {
         switch (state) {
-            case NEUTRAL: 
+        case NEUTRAL:
             statusMenu = new StatusMenu();
             break;
-            case MILITARY: 
+        case MILITARY:
             statusMenu = new MilitaryMenu();
             break;
-            case WORKER: 
+        case WORKER:
             statusMenu = new WorkerMenu();
             break;
-            case BUILDING: 
+        case BUILDING:
             statusMenu = new BuildingMenu();
             break;
-            case RECRUITING: 
+        case RECRUITING:
             statusMenu = new RecruitMenu();
+            break;
+        default:
             break;
         }
         vbox.getChildren().clear();
