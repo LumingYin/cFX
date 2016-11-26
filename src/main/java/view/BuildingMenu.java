@@ -55,9 +55,6 @@ public class BuildingMenu extends AbstractMenu {
 
         addMenuItem(invest);
         addMenuItem(demolish);
-        // getRootNode();
-        // endTurn();
         GameController.updateResourcesBar();
-        //TODO
     }
 }

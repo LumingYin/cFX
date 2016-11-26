@@ -19,6 +19,9 @@ import view.GameScreen;
 import model.QinDynasty;
 import model.RomanEmpire;
 import model.Egypt;
+import model.AmericanEmpire;
+import model.BluePrintEmpire;
+import model.FutureLandEmpire;
 import model.Bandit;
 
 import java.util.Optional;
@@ -103,6 +106,15 @@ public class CivilizationGame extends Application {
                         break;
                     case ROMAN_EMPIRE:
                         GameController.setCivilization(new RomanEmpire());
+                        break;
+                    case AMERICAN_EMPIRE:
+                        GameController.setCivilization(new AmericanEmpire());
+                        break;
+                    case FUTURELAND_EMPIRE:
+                        GameController.setCivilization(new FutureLandEmpire());
+                        break;
+                    case BLUEPRINT_EMPIRE:
+                        GameController.setCivilization(new BluePrintEmpire());
                         break;
                     default:
                         break;
