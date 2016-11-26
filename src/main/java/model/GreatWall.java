@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.image.Image;
+
 /**
  * Represnts a Great Wall that can increase strategy.
  *
@@ -26,5 +28,11 @@ class GreatWall extends Landmark {
     @Override
     public String toString() {
         return "Great Wall " + super.toString();
+    }
+
+    @Override
+    public Image getImage() {
+        return new Image("File:./src/main/java/view/Civ_Icon/"
+                + "great_wall_icon.PNG");
     }
 }

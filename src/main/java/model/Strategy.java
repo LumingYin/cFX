@@ -6,7 +6,7 @@ package model;
  * @version 1.0
  * @author Angie Palm
  */
-class Strategy {
+public class Strategy {
     private int strategyLevel;
     private boolean conqueredTheWorld;
     private static final int BATTLE_INCREASE = 10;
@@ -47,6 +47,6 @@ class Strategy {
      * Sets whether or not the world has been conquered!
      */
     private void setConqueredTheWorld() {
-        conqueredTheWorld = (strategyLevel >= 150);
+        conqueredTheWorld = (strategyLevel >= 500);
     }
 }

@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.image.Image;
+
 /**
  * Represents a Legion unit.
  *
@@ -35,4 +37,10 @@ class LegionUnit extends MeleeUnit {
     public String toString() {
         return "Legion. " + super.toString();
     }
+
+    @Override
+    public Image getImage() {
+        return new Image("File:./src/main/java/view/Civ_Icon/legion_icon.PNG");
+    }
+
 }

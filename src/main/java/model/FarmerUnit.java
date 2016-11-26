@@ -1,12 +1,15 @@
 package model;
 
+import controller.TileType;
+import javafx.scene.image.Image;
+
 /**
  * Represents a Farmer unit that can build a Farm.
  *
  * @author Jim Harris
  * @version 1.0
  */
-class FarmerUnit extends Unit implements Convertable {
+public class FarmerUnit extends Unit implements Convertable {
 
     /**
      * Public constructor
@@ -35,5 +38,10 @@ class FarmerUnit extends Unit implements Convertable {
     @Override
     public String toString() {
         return "Farmers. " + super.toString();
+    }
+    @Override
+    public Image getImage() {
+        return new Image(
+            "File:./src/main/java/view/Civ_Icon/farmer_unit_icon.PNG");
     }
 }

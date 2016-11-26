@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.image.Image;
+
 /**
  * Represents a Hybrid unit.
  *
@@ -34,5 +36,10 @@ class HybridUnit extends MilitaryUnit {
     @Override
     public String toString() {
         return "Hybrid Unit. " + super.toString();
+    }
+
+    @Override
+    public Image getImage() {
+        return new Image("File:./src/main/java/view/Civ_Icon/hybrid_unit.PNG");
     }
 }

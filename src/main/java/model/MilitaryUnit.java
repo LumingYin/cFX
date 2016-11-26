@@ -1,12 +1,14 @@
 package model;
 
+import javafx.scene.image.Image;
+
 /**
  * Represents a Military unit that is able to fight.
  *
  * @version 1.0
  * @author Jim Harris
  */
-abstract class MilitaryUnit extends Unit {
+public abstract class MilitaryUnit extends Unit {
 
     private int damage;
 
@@ -75,5 +77,17 @@ abstract class MilitaryUnit extends Unit {
     @Override
     public String toString() {
         return "Military Unit. " + super.toString();
+    }
+
+    @Override
+    public String getStatusString() {
+        return super.getStatusString()
+                + ("\nCan" + (getCanAttack() ? "" : "'t") + " attack");
+    }
+
+    @Override
+    public Image getImage() {
+        return new Image(
+                "File:./src/main/java/view/Civ_Icon/military_unit_icon.PNG");
     }
 }

@@ -6,7 +6,7 @@ package model;
  * @version 1.0
  * @author Jim Harris
  */
-abstract class Building extends MapObject {
+public abstract class Building extends MapObject {
     private int goldGeneration;
     private int resourceGeneration;
     private int foodGeneration;
@@ -68,6 +68,7 @@ abstract class Building extends MapObject {
         getOwner().getTechnology().increaseUnderstanding(philosophyGeneration);
         getOwner().getTechnology().increaseBuildExperience(techPointGeneration);
         getOwner().increaseHappiness(happinessGeneration);
+
     }
 
     /**
@@ -89,7 +90,7 @@ abstract class Building extends MapObject {
     /**
      * @return an int representing the resource generation of this Building.
      */
-    public int getResourceGeneration() {
+    public int getResossrceGeneration() {
         return resourceGeneration;
 
     }

@@ -1,4 +1,4 @@
-package model;
+package controller;
 
 /**
  * An enum representing the terrain type of a TerrainTile.
@@ -6,13 +6,14 @@ package model;
  * @version 1.0
  * @author Jim Harris
  */
-enum TileType {
+public enum TileType {
 
     PLAINS('P', "Plains", 1),
     MOUNTAIN('M', "Mountain", 5),
     HILLS('H', "Hills", 3),
     ICE('I', "Ice", 3),
     WATER('W', "Water", 5),
+    DESERT('D', "Desert", 3),
     FOREST('F', "Forest", 2);
 
     private char symbol;
@@ -26,7 +27,7 @@ enum TileType {
      * @param name the name of this kind of terrain.
      * @param cost the endurance needed to traverse this kind of tile.
      */
-    private TileType(char symbol, String name, int cost) {
+    TileType(char symbol, String name, int cost) {
         this.symbol = symbol;
         this.name = name;
         this.cost = cost;
@@ -51,5 +52,10 @@ enum TileType {
      */
     public int getCost() {
         return this.cost;
+    }
+
+
+    public String getTerrain() {
+        return name;
     }
 }

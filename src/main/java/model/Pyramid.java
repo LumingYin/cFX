@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.image.Image;
+
 /**
  * Represents a Pyramid that can increase philosophy.
  *
@@ -26,5 +28,10 @@ class Pyramid extends Landmark {
     @Override
     public String toString() {
         return "Pyramid " + super.toString();
+    }
+
+    @Override
+    public Image getImage() {
+        return new Image("File:./src/main/java/view/Civ_Icon/pyramid_icon.PNG");
     }
 }

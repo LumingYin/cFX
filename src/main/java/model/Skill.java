@@ -10,26 +10,26 @@ import java.util.Random;
  * @version 1.0
  */
 enum Skill {
-    POTTERY ("Pottery"),
-    ARGRICULTURE ("Agriculture"),
-    COMPUTING ("Computing"),
-    RADIO ("Radio"),
-    ARCHERY ("Archery"),
-    PAINTING ("Painting"),
-    SAILING ("Sailing"),
-    MINING ("Mining"),
-    MATHEMATICS ("Mathematics"),
-    ENGINEERING ("Engineering"),
-    ASTRONOMY ("Astronomy"),
-    STEEL ("Steel"),
-    BANKING ("Banking"),
-    GUNPOWDER ("Gunpowder"),
-    CHEMISTRY ("Chemistry"),
-    ECONOMICS ("Economics"),
-    DYNAMITE ("Dynamite"),
-    ELECTRICITY ("Electricity"),
-    NUCLEAR_FISSION ("Nuclear Fission"),
-    LASERS ("Lasers");
+    POTTERY("Pottery"),
+    ARGRICULTURE("Agriculture"),
+    COMPUTING("Computing"),
+    RADIO("Radio"),
+    ARCHERY("Archery"),
+    PAINTING("Painting"),
+    SAILING("Sailing"),
+    MINING("Mining"),
+    MATHEMATICS("Mathematics"),
+    ENGINEERING("Engineering"),
+    ASTRONOMY("Astronomy"),
+    STEEL("Steel"),
+    BANKING("Banking"),
+    GUNPOWDER("Gunpowder"),
+    CHEMISTRY("Chemistry"),
+    ECONOMICS("Economics"),
+    DYNAMITE("Dynamite"),
+    ELECTRICITY("Electricity"),
+    NUCLEAR_FISSION("Nuclear Fission"),
+    LASERS("Lasers");
 
     private String value;
 
@@ -38,7 +38,7 @@ enum Skill {
      * the String representation of that Skill
      * @param value the String value of the Skill
      */
-    private Skill(String value) {
+    Skill(String value) {
         this.value = value;
     }
 

@@ -6,7 +6,7 @@ package model;
  * @version 2.0
  * @author Angie Palm, Jim Harris (sorta)
  */
-class Treasury {
+public class Treasury {
     private int coins;
 
     /**

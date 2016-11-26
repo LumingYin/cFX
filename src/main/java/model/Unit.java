@@ -6,7 +6,7 @@ package model;
  * @version 1.0
  * @author Jim Harris
  */
-abstract class Unit extends MapObject {
+public abstract class Unit extends MapObject {
     private int baseEndurance;
     private int endurance;
     private int pay;
@@ -182,5 +182,10 @@ abstract class Unit extends MapObject {
     public String toString() {
         return "Unit. Endurance: " + endurance + ". " + "Can Attack: "
             + canAttack + ". " + super.toString();
+    }
+
+    @Override
+    public String getStatusString() {
+        return  super.getStatusString() + "\nEndurance: " + endurance;
     }
 }

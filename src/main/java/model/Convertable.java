@@ -1,9 +1,11 @@
 package model;
 
+import controller.TileType;
+
 /**
  * Represents something that can be converted into a Building.
  */
-interface Convertable {
+public interface Convertable {
 
     /**
      * @return the Building that this object turns into.

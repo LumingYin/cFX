@@ -1,12 +1,14 @@
 package model;
 
+import javafx.scene.image.Image;
+
 /**
- * Represnts a settlement that produces philosophy and gold.
+ * Represents a settlement that produces philosophy and gold.
  *
  * @version 2.0
  * @author Angie Palm, Jim Harris
  */
-class Settlement extends Building {
+public class Settlement extends Building {
     private String name;
     private int numBuildings;
 
@@ -45,5 +47,11 @@ class Settlement extends Building {
     @Override
     public String toString() {
         return name + " Settlement. " + super.toString();
+    }
+
+    @Override
+    public Image getImage() {
+        return new Image(
+                "File:./src/main/java/view/Civ_Icon/settlement_icon.PNG");
     }
 }

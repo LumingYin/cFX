@@ -6,33 +6,23 @@ package model;
  * @author Ryan Voor
  * @version 2.0
  */
-class Technology {
+public class Technology {
 
     private int techPoints;
-    private SimpleSet<Skill> skills;
 
     /**
      * Constructs a new Technology object
      * initializes techPoints to 0 and
-     * initializes skills to an empty MySet of Skills.
      */
     public Technology() {
         techPoints = 0;
-        skills = new MySet<>();
     }
 
     /**
-     * Increments techPoints and adds a new
-     * Skill to the techs set. The Skill that is added
-     * should be random (HINT: take a look at the getRandomSkill()
-     * method in the Skill class)
+     * Increments techPoints
      */
     public void gainATech() {
         techPoints++;
-        boolean looping = true;
-        while (looping) {
-            looping = !skills.add(Skill.getRandomSkill());
-        }
     }
 
     /**
@@ -43,20 +33,13 @@ class Technology {
         return techPoints;
     }
 
-    /**
-     * Getter for the skills of this Civilization
-     * @return SimpleSet of Skills this Civilization
-     */
-    public SimpleSet<Skill> getSkills() {
-        return skills;
-    }
 
     /**
      * Returns whether this Civilization has achieved a Technology win
      * @return boolean whether this Civilization has achieved 20 techPoints
      */
     public boolean hasTechnologyWin() {
-        return techPoints >= 20;
+        return techPoints >= 800;
     }
 
     /**
@@ -77,7 +60,9 @@ class Technology {
      * Adds a technical skill.
      */
     public void increaseBuildExperience() {
-        gainATech();
+        for (int i = 0; i < 25; i++) {
+            gainATech();
+        }
     }
 
     /**
@@ -86,7 +71,9 @@ class Technology {
      * @param i HAH
      */
     public void increaseBuildExperience(int i) {
-        gainATech();
+        for (int j = 0; j < i; j++) {
+            gainATech();
+        }
     }
 
     /**
@@ -94,29 +81,35 @@ class Technology {
      * nifty tourist attraction.
      */
     public boolean builtWonderOfTheWorld() {
-        return techPoints >= 10;
+        return techPoints >= 800;
     }
 
     /**
      * Increases understanding by a specified amount.
      *
-     * @param increase HAH
+     * @param increase
      */
-    public void increaseUnderstanding(int increase) {
-        gainATech();
+    public void increaseUnderstanding(int i) {
+        for (int j = 0; j < i; j++) {
+            gainATech();
+        }
     }
 
     /**
      * Adds a technical skill.
      */
     public void philosophize() {
-        gainATech();
+        for (int i = 0; i < 25; i++) {
+            gainATech();
+        }
     }
 
     /**
      * Adds a technical skill.
      */
     public void improveWriting() {
-        gainATech();
+        for (int i = 0; i < 10; i++) {
+            gainATech();
+        }
     }
 }

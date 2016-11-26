@@ -6,7 +6,7 @@ package model;
  * @version 2.0
  * @author Angie Palm, Jim Harris
  */
-class RomanEmpire extends Civilization {
+public class RomanEmpire extends Civilization {
     private Hills hills = new Hills();
 
     /**

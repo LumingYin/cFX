@@ -1,12 +1,15 @@
 package model;
 
+import controller.TileType;
+import javafx.scene.image.Image;
+
 /**
  * Represents a Settler unit that can build a Settlement.
  *
  * @version 1.0
  * @author Jim Harris
  */
-class SettlerUnit extends Unit implements Convertable {
+public class SettlerUnit extends Unit implements Convertable {
 
     private String townName;
 
@@ -40,5 +43,11 @@ class SettlerUnit extends Unit implements Convertable {
     @Override
     public String toString() {
         return "Settlers of " + townName + ". " + super.toString();
+    }
+
+    @Override
+    public Image getImage() {
+        return new Image(
+                "File:./src/main/java/view/Civ_Icon/settler_unit_icon.PNG");
     }
 }

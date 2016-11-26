@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.image.Image;
+
 /**
  * Represents a Melee unit.
  *
@@ -35,5 +37,11 @@ class MeleeUnit extends MilitaryUnit {
     @Override
     public String toString() {
         return "Melee Unit. " + super.toString();
+    }
+
+    @Override
+    public Image getImage() {
+        return new Image(
+                "File:./src/main/java/view/Civ_Icon/melee_unit_icon.PNG");
     }
 }

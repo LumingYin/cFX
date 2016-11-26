@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.image.Image;
+
 /**
  * Represents a Black Powder unit.
  *
@@ -13,7 +15,7 @@ class BlackPowderUnit extends SiegeUnit {
      *
      * @param owner The owner of this unit.
      */
-    public BlackPowderUnit(Civilization owner) {
+    BlackPowderUnit(Civilization owner) {
         super(owner);
     }
 
@@ -31,5 +33,10 @@ class BlackPowderUnit extends SiegeUnit {
     @Override
     public String toString() {
         return "Black Powder Unit. " + super.toString();
+    }
+    @Override
+    public Image getImage() {
+        return new Image("File:./src/main/java/view/Civ_Icon/"
+                + "black_powder_unit_icon.PNG");
     }
 }

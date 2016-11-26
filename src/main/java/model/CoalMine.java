@@ -1,5 +1,6 @@
 package model;
 
+import javafx.scene.image.Image;
 /**
  * Represents a coal mine that can generate resources.
  *
@@ -50,5 +51,10 @@ class CoalMine extends Building {
     @Override
     public String toString() {
         return "Coalmine. " + super.toString();
+    }
+    @Override
+    public Image getImage() {
+        return new Image(
+                "File:./src/main/java/view/Civ_Icon/coal_mine_icon.PNG");
     }
 }

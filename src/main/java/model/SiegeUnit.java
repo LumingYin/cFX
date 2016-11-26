@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.image.Image;
+
 /**
  * Represents a Siege unit.
  *
@@ -38,5 +40,11 @@ class SiegeUnit extends MilitaryUnit {
     @Override
     public String toString() {
         return "Siege Unit. " + super.toString();
+    }
+
+    @Override
+    public Image getImage() {
+        return new Image(
+                "File:./src/main/java/view/Civ_Icon/siege_unit_icon.PNG");
     }
 }

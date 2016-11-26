@@ -1,12 +1,15 @@
 package model;
 
+import controller.TileType;
+import javafx.scene.image.Image;
+
 /**
  * Represents a Master Builder unit that can build a Landmark.
  *
  * @author Jim Harris
  * @version 1.0
  */
-class MasterBuilderUnit extends Unit implements Convertable {
+public class MasterBuilderUnit extends Unit implements Convertable {
 
     /**
      * Public constructor
@@ -35,5 +38,11 @@ class MasterBuilderUnit extends Unit implements Convertable {
     @Override
     public String toString() {
         return "Master Builders. " + super.toString();
+    }
+
+    @Override
+    public Image getImage() {
+        return new Image(
+                "File:./src/main/java/view/Civ_Icon/master_builder_icon.PNG");
     }
 }

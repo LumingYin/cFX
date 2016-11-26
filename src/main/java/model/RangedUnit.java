@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.image.Image;
+
 /**
  * Represents a Ranged unit.
  *
@@ -35,5 +37,11 @@ class RangedUnit extends MilitaryUnit {
     @Override
     public String toString() {
         return "Ranged Unit. " + super.toString();
+    }
+
+    @Override
+    public Image getImage() {
+        return new Image(
+                "File:./src/main/java/view/Civ_Icon/range_unit_icon.PNG");
     }
 }

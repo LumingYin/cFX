@@ -1,8 +1,6 @@
 package model;
 
 import java.util.Random;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 /**
  * Represents a custom Set data structure.
@@ -16,43 +14,6 @@ class MySet<E> implements SimpleSet<E> {
     private int numElements;
     private final int startingSize = 5;
 
-    private class MySetIterator implements Iterator<E> {
-        private int cursor = 0;
-
-        public boolean hasNext() {
-            return cursor < numElements;
-        }
-
-        public E next() {
-            if (!hasNext()) {
-                throw new NoSuchElementException();
-            }
-            return data[cursor++];
-        }
-
-        public void remove() {
-            try {
-                if (cursor <= 0) {
-                    throw new IllegalStateException();
-                }
-                MySet.this.remove(data[--cursor]);
-            } catch (ElementDoesNotExistException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-
-    // Debug SOPs
-    public void debug() {
-        System.out.println();
-        System.out.println("Printing debug info:");
-        System.out.println("Private Array Length: " + data.length);
-        System.out.println("Private numElements/Public size(): " + numElements);
-        for (int  i = 0; i < data.length; i++) {
-            System.out.println("[" + i + "]: " + data[i]);
-        }
-        System.out.println();
-    }
     /**
      * Public constructor.
      */
@@ -60,10 +21,6 @@ class MySet<E> implements SimpleSet<E> {
     public MySet() {
         this.data = (E[]) new Object[startingSize];
         this.numElements = 0;
-    }
-
-    public Iterator<E> iterator() {
-        return new MySetIterator();
     }
 
     @Override
@@ -94,7 +51,7 @@ class MySet<E> implements SimpleSet<E> {
             if (data[i].equals(e)) {
                 E toBeReturned = data[i];
                 data[i] = null;
-                for (int j = i; j < numElements - 1; j++) {
+                for (int j = i; j < numElements; j++) {
                     data[j] = data[j + 1];
                 }
                 numElements--;
@@ -117,11 +74,9 @@ class MySet<E> implements SimpleSet<E> {
         E[] results = (E[]) new Object[elements.length];
         int counter = 0;
         for (E element: elements) {
-            // this guard is in case there are duplicate elements in the
-            // parameter array
-            if (this.contains(element)) {
-                results[counter++] = this.remove(element);
-            }
+            // hypothetically a ElementDoesNotExistException should never
+            // get thrown from this call since we checked above
+            results[counter++] = this.remove(element);
         }
         return results;
     }

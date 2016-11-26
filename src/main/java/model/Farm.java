@@ -1,12 +1,14 @@
 package model;
 
+import javafx.scene.image.Image;
+
 /**
  * Represents a Farm that can generate food.
  *
  * @version 1.0
  * @author Jim Harris
  */
-class Farm extends Building {
+public class Farm extends Building {
 
     /**
      * Public constructor.
@@ -31,5 +33,9 @@ class Farm extends Building {
     @Override
     public String toString() {
         return "Farm. " + super.toString();
+    }
+    @Override
+    public Image getImage() {
+        return new Image("File:./src/main/java/view/Civ_Icon/farm_icon.PNG");
     }
 }

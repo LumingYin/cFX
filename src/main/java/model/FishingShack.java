@@ -1,13 +1,14 @@
 package model;
 
 import java.util.Random;
+import javafx.scene.image.Image;
 
 /**
  * represents a FishingShack type of Building on a Tile on the Map
  * @author Ryan Voor
  * @version 3.0
  */
-class FishingShack extends Building {
+public class FishingShack extends Building {
     private SimpleSet<Fish> fish;
     private static Random rand = new Random();
 
@@ -26,7 +27,9 @@ class FishingShack extends Building {
         replenishFish();
         int foodGeneration = 0;
         int goldGeneration = 0;
-        for (Fish f : fish) {
+        Object[] fishes = fish.toArray();
+        for (Object o : fishes) {
+            Fish f = (Fish) o;
             foodGeneration += (int) (f.getHealth() / 2);
             goldGeneration += f.getHealth() - foodGeneration;
         }
@@ -77,5 +80,11 @@ class FishingShack extends Building {
     @Override
     public String toString() {
         return "FishingShack. " + super.toString();
+    }
+
+    @Override
+    public Image getImage() {
+        return new Image(
+                "File:./src/main/java/view/Civ_Icon/fishing_shack_icon.PNG");
     }
 }

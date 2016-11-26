@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.image.Image;
+
 /**
  * Represents a War Charior unit.
  *
@@ -28,5 +30,11 @@ class WarChariotUnit extends RangedUnit {
     @Override
     public String toString() {
         return "War Chariot Unit. " + super.toString();
+    }
+
+    @Override
+    public Image getImage() {
+        return new Image(
+                "File:./src/main/java/view/Civ_Icon/war_chariot_unit.PNG");
     }
 }

@@ -7,7 +7,7 @@ package model;
  * @author Ryan Voor
  * @version 1.0
  */
-interface SimpleSet<E> extends Iterable<E> {
+interface SimpleSet<E> {
 
     /**
      * Adds the passed in element to the set.

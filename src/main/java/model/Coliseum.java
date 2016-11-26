@@ -1,5 +1,6 @@
 package model;
 
+import javafx.scene.image.Image;
 /**
  * Represents a Coliseum that can increase happiness.
  *
@@ -27,5 +28,11 @@ class Coliseum extends Landmark {
     @Override
     public String toString() {
         return "Coliseum " + super.toString();
+    }
+
+    @Override
+    public Image getImage() {
+        return new Image(
+                "File:./src/main/java/view/Civ_Icon/coliseum_icon.PNG");
     }
 }
