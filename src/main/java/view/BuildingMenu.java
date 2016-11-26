@@ -27,6 +27,7 @@ public class BuildingMenu extends AbstractMenu {
                     bdl.invest();
                     GameController.getCivilization().getTreasury().spend(25);
                     GameScreen.getResources().update();
+                    playSFX("BuildingMenu_invest");
                 } else {
                     showAlert("Insufficient Balance",
                         "It is not possible to invest in this Building.");
@@ -49,6 +50,7 @@ public class BuildingMenu extends AbstractMenu {
                     GameController.getLastClicked().getTile().setOccupant(null);
                     GameController.getCivilization().decrementNumSettlements();
                     GameScreen.getResources().update();
+                    playSFX("BuildingMenu_demolish");
                 }
                 GridFX.update();
                 GameController.setLastClicked(GameController.getLastClicked());

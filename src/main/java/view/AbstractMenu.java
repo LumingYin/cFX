@@ -7,7 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.control.Alert.AlertType;
-// import javafx.scene.media.AudioClip;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.Media;
+import java.io.File;
 
 /**
  * Created by RuYiMarone on 11/12/2016.
@@ -27,6 +29,7 @@ public class AbstractMenu {
 
         exploreButton.setOnMousePressed(e -> {
                 GameController.getCivilization().explore();
+                playSFX("AbstractMenu_explore");
                 if (endTurn()) {
                     Alert newAlert = new Alert(Alert.AlertType.CONFIRMATION);
                     newAlert.setHeaderText("Congratulations");
@@ -37,6 +40,7 @@ public class AbstractMenu {
             });
 
         endTurnButton.setOnAction(event -> {
+                playSFX("AbstractMenu_end");
                 if (endTurn()) {
                     Alert newAlert = new Alert(Alert.AlertType.CONFIRMATION);
                     newAlert.setHeaderText("Congratulations");
@@ -103,6 +107,18 @@ public class AbstractMenu {
         alert.setHeaderText(title);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    public void playSFX(String fileName) {
+        try {
+            String s = "src/main/java/view/sfx/" + fileName + ".wav";
+            File file = new File("src/main/java/view/sfx/" + fileName + ".wav");
+            Media sound = new Media(file.toURI().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer.play();
+        } catch (Throwable e) {
+            System.out.print("");
+        }
     }
 
 }

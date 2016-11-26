@@ -20,6 +20,9 @@ public class WorkerMenu extends AbstractMenu {
         move.setOnAction(event -> {
                 GameController.moving();
                 GridFX.update();
+                // questionable implementation
+                // due to Controller limitations
+                playSFX("WorkerMenu_move");
             });
 
 
@@ -31,6 +34,8 @@ public class WorkerMenu extends AbstractMenu {
                     GameController.getLastClicked().
                 getTile().setOccupant(worker.convert());
                     // GameScreen.getResources().update();
+                    GameController.getCivilization().incrementNumSettlements();
+                    playSFX("WorkerMenu_convert");
                     GameController.updateResourcesBar();
                     GridFX.update();
                     GameController.setLastClicked(GameController.

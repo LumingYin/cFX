@@ -133,6 +133,7 @@ public class RecruitMenu extends AbstractMenu {
                     GameController.getLastClicked().
                         getTile().setOccupant(newUnit);
                 }
+                playSFX("RecruitMenu_select");
                 GridFX.update();
                 GameController.setLastClicked(GameController.getLastClicked());
                 GameController.updateResourcesBar();
