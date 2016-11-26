@@ -8,15 +8,16 @@ import javafx.scene.control.Button;
  * This class should represents the bulding menu
  */
 public class BuildingMenu extends AbstractMenu {
-
+    private Button invest;
+    private Button demolish;
     /**
      * there should be an invest and demolish button for this menu
      * as well as functions associated with the buttons
      */
     public BuildingMenu() {
         super();
-        Button invest = new Button("Invest");
-        Button demolish = new Button("Demolish");
+        invest = new Button("Invest");
+        demolish = new Button("Demolish");
 
         invest.setOnAction(event -> {
                 if (GameController.getCivilization().getTreasury().

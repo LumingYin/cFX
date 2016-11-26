@@ -24,7 +24,6 @@ class FutureLandHousing extends Landmark {
         getOwner().increaseHappiness(50);
     }
 
-
     @Override
     public String toString() {
         return "Futuristic Housing " + super.toString();

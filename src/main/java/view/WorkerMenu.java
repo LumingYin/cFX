@@ -22,6 +22,7 @@ public class WorkerMenu extends AbstractMenu {
                 GridFX.update();
             });
 
+
         convert.setOnAction(event -> {
                 Convertable worker = (Convertable) GameController.
                     getLastClicked().getTile().getOccupant();
@@ -29,7 +30,8 @@ public class WorkerMenu extends AbstractMenu {
                     getLastClicked().getTile().getType())) {
                     GameController.getLastClicked().
                 getTile().setOccupant(worker.convert());
-                    GameScreen.getResources().update();
+                    // GameScreen.getResources().update();
+                    GameController.updateResourcesBar();
                     GridFX.update();
                     GameController.setLastClicked(GameController.
                         getLastClicked());
@@ -41,8 +43,6 @@ public class WorkerMenu extends AbstractMenu {
 
         addMenuItem(move);
         addMenuItem(convert);
-
-
     }
 
 

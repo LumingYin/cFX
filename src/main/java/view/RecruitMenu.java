@@ -123,13 +123,19 @@ public class RecruitMenu extends AbstractMenu {
                 default:
                     break;
                 }
-                if (newUnit != null && newUnit.isAffordable()) {
+                if (newUnit == null) {
+                    showAlert("Can't Create Unit", "The new unit is null.");
+                } else if (!newUnit.isAffordable()) {
+                    showAlert("Can't Create Unit",
+                        "Your remaining balance is insufficient.");
+                } else {
                     newUnit.applyInitialCosts();
                     GameController.getLastClicked().
                         getTile().setOccupant(newUnit);
                 }
                 GridFX.update();
                 GameController.setLastClicked(GameController.getLastClicked());
+                GameController.updateResourcesBar();
             });
 
         addMenuItem(unitView);

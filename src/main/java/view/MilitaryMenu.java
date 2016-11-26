@@ -8,16 +8,19 @@ import javafx.scene.control.Button;
  */
 
 public class MilitaryMenu extends AbstractMenu {
+    private Button attack;
+    private Button move;
     /**
     * Implement the buttons and actions associated with
     * the buttons for the military menu
     */
     public MilitaryMenu() {
-        Button attack = new Button("Attack");
-        Button move = new Button("Move");
+        attack = new Button("Attack");
+        move = new Button("Move");
 
         attack.setOnAction(event -> {
                 GameController.attacking();
+                GameController.updateResourcesBar();
                 GridFX.update();
             });
 

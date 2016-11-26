@@ -27,7 +27,6 @@ public class GameScreen extends BorderPane {
         statusMenu = new StatusMenu();
         this.setCenter(grid);
         vbox = new VBox();
-        // vbox.setPadding(new Insets(0, 50, 0, 0));
         vbox.getChildren().addAll(statusMenu.getRootNode());
         this.setLeft(vbox);
         this.setTop(resourcesMenu.getRootNode());

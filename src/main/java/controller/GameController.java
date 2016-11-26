@@ -14,6 +14,9 @@ import model.Unit;
 import view.GameScreen;
 import view.GridFX;
 import view.TerrainTileFX;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+
 
 /**
  * Created by RuYiMarone on 11/11/2016.
@@ -54,6 +57,13 @@ public class GameController {
         } else if (state == GameState.MOVING) {
             if (move(last)) {
                 lastClicked = last;
+            } else {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Unable to move");
+                alert.setHeaderText("Unable to move the tile");
+                alert.setContentText("You can only move to a "
+                    + "nearby tile that is not the origonal tile.");
+                alert.showAndWait();
             }
         }
         //update lastClicked
@@ -161,6 +171,11 @@ public class GameController {
             || !((MilitaryUnit) attacker.getOccupant()).getCanAttack()
             || !GridFX.adjacent(attacker, enemy)) {
             state = GameState.NEUTRAL;
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Attack failed");
+            alert.setHeaderText("Unable to attack");
+            alert.setContentText("Attack failed.");
+            alert.showAndWait();
             return;
         }
 
