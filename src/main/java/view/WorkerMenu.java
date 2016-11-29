@@ -20,9 +20,6 @@ public class WorkerMenu extends AbstractMenu {
         move.setOnAction(event -> {
                 GameController.moving();
                 GridFX.update();
-                // questionable implementation
-                // due to Controller limitations
-                playSFX("WorkerMenu_move");
             });
 
 

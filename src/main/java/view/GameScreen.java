@@ -6,6 +6,9 @@ import model.Map;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.geometry.Pos;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+
 
 /**
  * This class represents the GameScreen class
@@ -28,7 +31,13 @@ public class GameScreen extends BorderPane {
         map = GridFX.getMap();
         resourcesMenu = new ResourcesMenu();
         statusMenu = new StatusMenu();
-        this.setCenter(grid);
+
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setContent(grid);
+        scrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+        scrollPane.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
+
+        this.setCenter(scrollPane);
         vbox = new VBox();
         hbox = new HBox();
         hbox.setAlignment(Pos.CENTER);
@@ -60,7 +69,6 @@ public class GameScreen extends BorderPane {
     public static ResourcesMenu getResources() {
         return resourcesMenu;
     }
-
 
     /**
      * This method switches menus based on passed in game state.

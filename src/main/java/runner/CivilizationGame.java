@@ -10,7 +10,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-// import javafx.scene.text.Font;
 import javafx.scene.paint.Color;
 import view.StartScreen;
 import view.CivEnum;
@@ -23,6 +22,12 @@ import model.AmericanEmpire;
 import model.BluePrintEmpire;
 import model.FutureLandEmpire;
 import model.Bandit;
+import javafx.scene.control.ChoiceBox;
+import javafx.collections.FXCollections;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import java.io.PrintWriter;
+
 
 import java.util.Optional;
 
@@ -37,6 +42,8 @@ public class CivilizationGame extends Application {
     private ListView<CivEnum> civList;
     private Button startBtn;
     private Bandit bandit;
+    private int mapSize;
+    // private File temp;
 
     /**
      * this method is called upon running/launching the application
@@ -74,23 +81,18 @@ public class CivilizationGame extends Application {
     public Scene startGame() {
         startScreen = new StartScreen();
         civList = startScreen.getCivList();
-
         bandit = new Bandit();
-
         startBtn = startScreen.getStartButton();
-        startBtn.setTranslateY(-70);
-
+        startBtn.setTranslateY(-50);
         VBox civListBox = new VBox();
         civListBox.getChildren().addAll(civList);
         civListBox.setAlignment(Pos.BOTTOM_CENTER);
-        civListBox.setTranslateY(-160);
-
+        civListBox.setTranslateY(-230);
         Text textBox = new Text();
         textBox.setText("Select your civilization");
         textBox.setFill(Color.WHITE);
-        // textBox.setFont(Font.font("Arial Narrow", 22));
         textBox.setId("select-text");
-        textBox.setTranslateY(-400);
+        textBox.setTranslateY(-470);
 
         TextInputDialog popup = new TextInputDialog();
         startBtn.setOnAction(event -> {
@@ -123,23 +125,105 @@ public class CivilizationGame extends Application {
                     default:
                         break;
                     }
-                    GridFX.getMap().putSettlement(townName.get(),
-                        GameController.getCivilization(), 0, 9);
+                    try {
+                        PrintWriter writer = new PrintWriter(".ds.tmp",
+                            "UTF-8");
+                        switch (mapSize) {
+                        case 0:
+                            writer.printf("0");
+                            break;
+                        case 1:
+                            writer.printf("1");
+                            break;
+                        case 2:
+                            writer.printf("2");
+                            break;
+                        case 3:
+                            writer.printf("3");
+                            break;
+                        case 4:
+                            writer.printf("4");
+                            break;
+                        default:
+                            writer.printf("0");
+                            break;
+                        }
+                        writer.close();
+                    } catch (Throwable e) {
+                        e.printStackTrace();
+                    }
                     GridFX.update();
-                    GridFX.getMap().addEnemies(bandit, 1);
+                    switch (mapSize) {
+                    case 0:
+                        GridFX.getMap().putSettlement(townName.get(),
+                            GameController.getCivilization(), 0, 9);
+                        GridFX.getMap().addEnemies(bandit, 1);
+                        break;
+                    case 1:
+                        GridFX.getMap().putSettlement(townName.get(),
+                            GameController.getCivilization(), 0, 14);
+                        GridFX.getMap().addEnemies(bandit, 2);
+                        break;
+                    case 2:
+                        GridFX.getMap().putSettlement(townName.get(),
+                            GameController.getCivilization(), 0, 19);
+                        GridFX.getMap().addEnemies(bandit, 3);
+                        break;
+                    case 3:
+                        GridFX.getMap().putSettlement(townName.get(),
+                            GameController.getCivilization(), 0, 24);
+                        GridFX.getMap().addEnemies(bandit, 4);
+                        break;
+                    case 4:
+                        GridFX.getMap().putSettlement(townName.get(),
+                            GameController.getCivilization(), 0, 29);
+                        GridFX.getMap().addEnemies(bandit, 5);
+                        break;
+                    default:
+                        GridFX.getMap().putSettlement(townName.get(),
+                            GameController.getCivilization(), 0, 9);
+                        GridFX.getMap().addEnemies(bandit, 1);
+                        break;
+                    }
+                    GridFX.update();
                     gameScreen = new GameScreen();
                     scene2 = new Scene(gameScreen);
                     scene2.getStylesheets().add(CivilizationGame.class.
                         getResource("style2.css").toExternalForm());
                     stage.setScene(scene2);
-                    stage.setMinHeight(800.0);
-                    stage.setMaxHeight(800.0);
-                    stage.setMinWidth(870.0);
-                    stage.setMaxWidth(870.0);
+                    stage.setMinHeight(810.0);
+                    stage.setMaxHeight(810.0);
+                    stage.setMinWidth(880.0);
+                    stage.setMaxWidth(880.0);
                 }
             });
 
-        startScreen.getChildren().addAll(textBox, startBtn, civListBox);
+        Text textBox2 = new Text();
+        textBox2.setText("Select your map's size");
+        textBox2.setFill(Color.WHITE);
+        textBox2.setId("select-text");
+        textBox2.setTranslateY(-180);
+
+        final ChoiceBox cb = new ChoiceBox(FXCollections.observableArrayList(
+            "10 × 10 [Beginners' Journey]", "15 × 15 [Kinda Intermediate]",
+            "20 × 20 [Pretty Difficult]", "25 × 25 [Very Difficult]",
+            "30 × 30 [Quite Advanced]")
+        );
+        cb.setValue("10 × 10 [Beginners' Journey]");
+        cb.setTranslateY(-145);
+        cb.setId("map-size");
+
+        cb.getSelectionModel().selectedIndexProperty().addListener(new
+            ChangeListener<Number>() {
+                public void changed(ObservableValue ov,
+                    Number value, Number newValue) {
+                    mapSize = (int) newValue;
+            }
+        });
+
+
+        startScreen.getChildren().addAll(textBox, startBtn,
+            civListBox, textBox2, cb);
         startScreen.setAlignment(Pos.BOTTOM_CENTER);
         scene1 = new Scene(startScreen);
         return scene1;

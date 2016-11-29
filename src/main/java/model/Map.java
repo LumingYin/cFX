@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * Represents the map that the game will be played on. All MapObjects for the
@@ -38,33 +40,37 @@ public class Map {
         }
 
         //Populate the map with different Terrain types
-        populateMap();
+        populateMapWithExtras(rows, columns);
     }
 
-    //this will also populate the map hopefully
-    private void populateMap() {
-        TileType[][] tiles = new TileType[10][10];
+    private void populateMapWithExtras(int rows, int columns) {
+        TileType[][] tiles = new TileType[rows][columns];
         //populates with whatever terrain you want
         //this could be made better if you make map give you an array of
         //TileTypes instead
         Random rand = new Random();
-        for (int r = 0; r < 10; r++) {
-            TileType[] row = new TileType[10];
-            for (int c = 0; c < 10; c++) {
+        for (int r = 0; r < rows; r++) {
+            TileType[] row = new TileType[rows];
+            for (int c = 0; c < columns; c++) {
                 int seed = rand.nextInt(2);
                 int value = seed + r + c;
                 TileType type = TileType.PLAINS;
-                if (value < 5) {
+                if (value < (int) ((rows + columns) / 4)) {
                     type = TileType.WATER;
                 }
-                if (value > 8 && value < 14 && c < 5 && r > 5) {
+                if (value > (int) ((rows + columns) / 2.5)
+                    && value < (int) ((rows + columns) / 1.4)
+                    && c < (int) ((rows + columns) / 4)
+                    && r > (int) ((rows + columns) / 4)) {
                     type = TileType.DESERT;
-                } else if (value > 10 && value < 16) {
+                } else if (value > (int) ((rows + columns) / 2)
+                    && value < (int) ((rows + columns) / 1.25)) {
                     type = TileType.FOREST;
                 }
-                if (value > 14 && value < 18) {
+                if (value > (int) ((rows + columns) / 1.4)
+                    && value < (int) ((rows + columns) * 0.9)) {
                     type = TileType.MOUNTAIN;
-                } else if (value >= 18) {
+                } else if (value >= (int) ((rows + columns) * 0.9)) {
                     type = TileType.ICE;
                 }
                 map[r][c].setType(type);
@@ -96,14 +102,52 @@ public class Map {
      * @param bandit the enemy Civilization.
      */
     public static void addEnemies(Bandit bandit, int numEnemies) {
+        int h, v;
+        int mapSize = 0;
+        try {
+            String contents = new String(Files.
+                readAllBytes(Paths.get(".ds.tmp")));
+            mapSize = Integer.parseInt(contents);
+            // File ff = new File(".ds.tmp");
+            // boolean result = Files.deleteIfExists(ff.toPath());
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+        switch (mapSize) {
+        case 0:
+            h = 10;
+            v = 10;
+            break;
+        case 1:
+            h = 15;
+            v = 15;
+            break;
+        case 2:
+            h = 20;
+            v = 20;
+            break;
+        case 3:
+            h = 25;
+            v = 25;
+            break;
+        case 4:
+            h = 30;
+            v = 30;
+            break;
+        default:
+            h = 10;
+            v = 10;
+            break;
+        }
+
         for (int i = 0; i < numEnemies; i++) {
-            int r = new Random().nextInt(10);
-            int c = new Random().nextInt(10);
-            putSettlement("Bandit Hideout", bandit, 9, 0);
+            int r = new Random().nextInt(h);
+            int c = new Random().nextInt(v);
+            putSettlement("Bandit Hideout", bandit, h - 1, 0);
             while (!map[r][c].isEmpty()) {
                 //try to get new coords
-                r = new Random().nextInt(10);
-                c = new Random().nextInt(10);
+                r = new Random().nextInt(h);
+                c = new Random().nextInt(v);
             }
             map[r][c].setOccupant(bandit.getMeleeUnit());
         }

@@ -3,18 +3,58 @@ package view;
 import javafx.scene.layout.GridPane;
 import model.Map;
 import model.TerrainTile;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * Created by RuYiMarone on 11/11/2016.
  */
 public class GridFX extends GridPane {
-    private static Map map = new Map(10, 10);
+    private static Map map;
     private static GridFX instance = new GridFX();
+    private int mapSize = 0;
+    private int h, v;
 
     private GridFX() {
         instance = this;    //pseudo singleton so that update can be called
-        for (int r = 0; r < 10; r++) {
-            for (int c = 0; c < 10; c++) {
+        try {
+            String contents = new String(Files.
+                readAllBytes(Paths.get(".ds.tmp")));
+            mapSize = Integer.parseInt(contents);
+            // File ff = new File(".ds.tmp");
+            // boolean result = Files.deleteIfExists(ff.toPath());
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+        switch (mapSize) {
+        case 0:
+            h = 10;
+            v = 10;
+            break;
+        case 1:
+            h = 15;
+            v = 15;
+            break;
+        case 2:
+            h = 20;
+            v = 20;
+            break;
+        case 3:
+            h = 25;
+            v = 25;
+            break;
+        case 4:
+            h = 30;
+            v = 30;
+            break;
+        default:
+            h = 10;
+            v = 10;
+            break;
+        }
+        map = new Map(h, v);
+        for (int r = 0; r < h; r++) {
+            for (int c = 0; c < v; c++) {
                 this.add(new TerrainTileFX(map.getTile(r, c)), c, r);
             }
         }

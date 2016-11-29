@@ -22,17 +22,11 @@ public class MilitaryMenu extends AbstractMenu {
                 GameController.attacking();
                 GameController.updateResourcesBar();
                 GridFX.update();
-                // This implementation is questionable
-                // because there is no feedback of success
-                playSFX("MilitaryMenu_attack");
             });
 
         move.setOnAction(event -> {
                 GameController.moving();
                 GridFX.update();
-                // This implementation is questionable
-                // because there is no feedback of success
-                playSFX("MilitaryMenu_move");
             });
 
         addMenuItem(attack);

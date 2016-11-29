@@ -16,7 +16,11 @@ import view.GridFX;
 import view.TerrainTileFX;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.Media;
+import java.io.File;
 
 /**
  * Created by RuYiMarone on 11/11/2016.
@@ -31,6 +35,19 @@ public class GameController {
     public enum GameState {
         NEUTRAL, MILITARY, WORKER, BUILDING, RECRUITING, ATTACKING, MOVING;
     }
+
+    private static void playSFX(String fileName) {
+        try {
+            String s = "src/main/java/view/sfx/" + fileName + ".wav";
+            File file = new File("src/main/java/view/sfx/" + fileName + ".wav");
+            Media sound = new Media(file.toURI().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer.play();
+        } catch (Throwable e) {
+            System.out.print("");
+        }
+    }
+
 
     /**
      * Updates the state machine to control the game
@@ -57,6 +74,7 @@ public class GameController {
         } else if (state == GameState.MOVING) {
             if (move(last)) {
                 lastClicked = last;
+                playSFX("MilitaryMenu_move");
             } else {
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Unable to move");
@@ -178,6 +196,9 @@ public class GameController {
             alert.showAndWait();
             return;
         }
+        if (attacker.getOccupant().getOwner() == playerCivilization) {
+            playSFX("MilitaryMenu_attack");
+        }
 
         ((MilitaryUnit) attacker.getOccupant()).attack(enemy.getOccupant());
 
@@ -217,12 +238,50 @@ public class GameController {
      * if the recruit menu should be shown
      */
     private static boolean nearSettlement(TerrainTileFX tile) {
+        int h, v;
+        int mapSize = 0;
+        try {
+            String contents = new String(Files.
+                readAllBytes(Paths.get(".ds.tmp")));
+            mapSize = Integer.parseInt(contents);
+            // File ff = new File(".ds.tmp");
+            // boolean result = Files.deleteIfExists(ff.toPath());
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+        switch (mapSize) {
+        case 0:
+            h = 10;
+            v = 10;
+            break;
+        case 1:
+            h = 15;
+            v = 15;
+            break;
+        case 2:
+            h = 20;
+            v = 20;
+            break;
+        case 3:
+            h = 25;
+            v = 25;
+            break;
+        case 4:
+            h = 30;
+            v = 30;
+            break;
+        default:
+            h = 10;
+            v = 10;
+            break;
+        }
+
         int row = tile.getTile().getRow();
         int col = tile.getTile().getCol();
         Map map = GridFX.getMap();
         for (int r = row - 1; r < row + 2; r++) {
             for (int c = col - 1; c < col + 2; c++) {
-                if (c >= 0 && c < 10 && r >= 0 && r < 10) {
+                if (c >= 0 && c < h && r >= 0 && r < v) {
                     MapObject occupant = map.getTile(r, c).getOccupant();
                     if (occupant != null
                             && occupant instanceof Settlement
