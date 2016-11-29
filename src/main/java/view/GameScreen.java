@@ -4,6 +4,8 @@ import controller.GameController;
 import javafx.scene.layout.BorderPane;
 import model.Map;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
+import javafx.geometry.Pos;
 
 /**
  * This class represents the GameScreen class
@@ -14,6 +16,7 @@ public class GameScreen extends BorderPane {
     private static AbstractMenu statusMenu;
     private static ResourcesMenu resourcesMenu;
     private static VBox vbox;
+    private static HBox hbox;
 
     /**
      * Creates a new view into the game. this layout should include
@@ -27,9 +30,20 @@ public class GameScreen extends BorderPane {
         statusMenu = new StatusMenu();
         this.setCenter(grid);
         vbox = new VBox();
+        hbox = new HBox();
+        hbox.setAlignment(Pos.CENTER);
+
+        vbox.setStyle("-fx-padding: 12;"
+                      + "-fx-border-insets: 5;"
+                      + "-fx-background-color: #000000;"
+                      );
+        hbox.setStyle("-fx-padding: 12;"
+                      + "-fx-border-insets: 5;"
+                      + "-fx-background-color: #000000;");
+        hbox.getChildren().addAll(resourcesMenu.getRootNode());
         vbox.getChildren().addAll(statusMenu.getRootNode());
         this.setLeft(vbox);
-        this.setTop(resourcesMenu.getRootNode());
+        this.setTop(hbox);
     }
 
     /**

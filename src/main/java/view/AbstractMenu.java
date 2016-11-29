@@ -10,6 +10,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.Media;
 import java.io.File;
+import javafx.scene.paint.Color;
 
 /**
  * Created by RuYiMarone on 11/12/2016.
@@ -24,6 +25,9 @@ public class AbstractMenu {
             exploreButton, endTurnButton);
 
     public AbstractMenu() {
+        terrain.setFill(Color.WHITE);
+        unitStatus.setFill(Color.WHITE);
+
         menu.setPrefWidth(PREFWIDTH);
         unitStatus.setWrappingWidth(120);
 
@@ -57,6 +61,8 @@ public class AbstractMenu {
      * the menu
      */
     public VBox getRootNode() {
+        menu.getStylesheets().add(AbstractMenu.class.
+            getResource("style3.css").toExternalForm());
         updateItems();
         return menu;
     }

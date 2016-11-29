@@ -10,7 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.scene.text.Font;
+// import javafx.scene.text.Font;
 import javafx.scene.paint.Color;
 import view.StartScreen;
 import view.CivEnum;
@@ -49,7 +49,10 @@ public class CivilizationGame extends Application {
         stage.setMaxHeight(720.0);
         stage.setMaxWidth(1280.0);
         // stage.initStyle(StageStyle.TRANSPARENT);
-        stage.setScene(startGame());
+        Scene x = startGame();
+        stage.setScene(x);
+        x.getStylesheets().add(CivilizationGame.class.
+            getResource("style.css").toExternalForm());
         stage.show();
     }
 
@@ -80,13 +83,14 @@ public class CivilizationGame extends Application {
         VBox civListBox = new VBox();
         civListBox.getChildren().addAll(civList);
         civListBox.setAlignment(Pos.BOTTOM_CENTER);
-        civListBox.setTranslateY(-105);
+        civListBox.setTranslateY(-160);
 
         Text textBox = new Text();
-        textBox.setText("Select a civilization to begin:");
-        textBox.setFill(Color.RED);
-        textBox.setFont(Font.font(null, 14));
-        textBox.setTranslateY(-220);
+        textBox.setText("Select your civilization");
+        textBox.setFill(Color.WHITE);
+        // textBox.setFont(Font.font("Arial Narrow", 22));
+        textBox.setId("select-text");
+        textBox.setTranslateY(-400);
 
         TextInputDialog popup = new TextInputDialog();
         startBtn.setOnAction(event -> {
@@ -125,11 +129,13 @@ public class CivilizationGame extends Application {
                     GridFX.getMap().addEnemies(bandit, 1);
                     gameScreen = new GameScreen();
                     scene2 = new Scene(gameScreen);
+                    scene2.getStylesheets().add(CivilizationGame.class.
+                        getResource("style2.css").toExternalForm());
                     stage.setScene(scene2);
-                    stage.setMinHeight(745.0);
-                    stage.setMinWidth(850.0);
-                    stage.setMaxHeight(745.0);
-                    stage.setMaxWidth(850.0);
+                    stage.setMinHeight(800.0);
+                    stage.setMaxHeight(800.0);
+                    stage.setMinWidth(870.0);
+                    stage.setMaxWidth(870.0);
                 }
             });
 

@@ -36,13 +36,17 @@ public class StartScreen extends StackPane {
         imv.setPreserveRatio(true);
         this.getChildren().add(imv);
 
-        startButton = new Button("Start");
+        startButton = new Button("");
+        Image startBtnImage = new Image(getClass().
+            getResourceAsStream("startBtn.png"));
+        startButton.setGraphic(new ImageView(startBtnImage));
 
         ObservableList<CivEnum> enumToUIList = FXCollections.
             observableArrayList(CivEnum.values());
         civList = new ListView();
-        civList.setMaxSize(200, 100);
+        civList.setMaxSize(300, 230);
         civList.setItems(enumToUIList);
+        civList.setId("city-list");
         civList.getSelectionModel().select(0);
         civList.getFocusModel().focus(0);
     }
