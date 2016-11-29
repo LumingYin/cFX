@@ -26,9 +26,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.collections.FXCollections;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import java.io.PrintWriter;
-
-
 import java.util.Optional;
 
 /**
@@ -125,33 +122,33 @@ public class CivilizationGame extends Application {
                     default:
                         break;
                     }
-                    try {
-                        PrintWriter writer = new PrintWriter(".ds.tmp",
-                            "UTF-8");
-                        switch (mapSize) {
-                        case 0:
-                            writer.printf("0");
-                            break;
-                        case 1:
-                            writer.printf("1");
-                            break;
-                        case 2:
-                            writer.printf("2");
-                            break;
-                        case 3:
-                            writer.printf("3");
-                            break;
-                        case 4:
-                            writer.printf("4");
-                            break;
-                        default:
-                            writer.printf("0");
-                            break;
-                        }
-                        writer.close();
-                    } catch (Throwable e) {
-                        e.printStackTrace();
+                    // try {
+                    //     PrintWriter writer = new PrintWriter(".ds.tmp",
+                    //         "UTF-8");
+                    switch (mapSize) {
+                    case 0:
+                        GameController.setRowColumn(10, 10);
+                        break;
+                    case 1:
+                        GameController.setRowColumn(15, 15);
+                        break;
+                    case 2:
+                        GameController.setRowColumn(20, 20);
+                        break;
+                    case 3:
+                        GameController.setRowColumn(25, 25);
+                        break;
+                    case 4:
+                        GameController.setRowColumn(30, 30);
+                        break;
+                    default:
+                        GameController.setRowColumn(10, 10);
+                        break;
                     }
+                    //     writer.close();
+                    // } catch (Throwable e) {
+                    //     e.printStackTrace();
+                    // }
                     GridFX.update();
                     switch (mapSize) {
                     case 0:

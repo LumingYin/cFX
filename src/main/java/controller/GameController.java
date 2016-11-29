@@ -16,8 +16,6 @@ import view.GridFX;
 import view.TerrainTileFX;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.Media;
 import java.io.File;
@@ -32,6 +30,19 @@ public class GameController {
     private static GameState state = GameState.NEUTRAL;
     private static Random rand = new Random();
     private static int h, v;
+
+    public static void setRowColumn(int row, int col) {
+        h = row;
+        v = col;
+    }
+
+    public static int getRow() {
+        return h;
+    }
+
+    public static int getCol() {
+        return v;
+    }
 
     public enum GameState {
         NEUTRAL, MILITARY, WORKER, BUILDING, RECRUITING, ATTACKING, MOVING;
@@ -239,43 +250,6 @@ public class GameController {
      * if the recruit menu should be shown
      */
     private static boolean nearSettlement(TerrainTileFX tile) {
-        int mapSize = 0;
-        try {
-            String contents = new String(Files.
-                readAllBytes(Paths.get(".ds.tmp")));
-            mapSize = Integer.parseInt(contents);
-            // File ff = new File(".ds.tmp");
-            // boolean result = Files.deleteIfExists(ff.toPath());
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-        switch (mapSize) {
-        case 0:
-            h = 10;
-            v = 10;
-            break;
-        case 1:
-            h = 15;
-            v = 15;
-            break;
-        case 2:
-            h = 20;
-            v = 20;
-            break;
-        case 3:
-            h = 25;
-            v = 25;
-            break;
-        case 4:
-            h = 30;
-            v = 30;
-            break;
-        default:
-            h = 10;
-            v = 10;
-            break;
-        }
-
         int row = tile.getTile().getRow();
         int col = tile.getTile().getCol();
         Map map = GridFX.getMap();
