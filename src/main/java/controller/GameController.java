@@ -31,6 +31,7 @@ public class GameController {
     private static Civilization enemyCiv = new Bandit();
     private static GameState state = GameState.NEUTRAL;
     private static Random rand = new Random();
+    private static int h, v;
 
     public enum GameState {
         NEUTRAL, MILITARY, WORKER, BUILDING, RECRUITING, ATTACKING, MOVING;
@@ -238,7 +239,6 @@ public class GameController {
      * if the recruit menu should be shown
      */
     private static boolean nearSettlement(TerrainTileFX tile) {
-        int h, v;
         int mapSize = 0;
         try {
             String contents = new String(Files.
@@ -337,8 +337,8 @@ public class GameController {
     public static void ai() {
         List<TerrainTile> bandits = new ArrayList<>();
         TerrainTile banditHideout = null;
-        for (int r = 0; r < 10; r++) {
-            for (int c = 0; c < 10; c++) {
+        for (int r = 0; r < h; r++) {
+            for (int c = 0; c < v; c++) {
                 TerrainTile tile = GridFX.getMap().getTile(r, c);
                 if (!tile.isEmpty()
                         && !tile.getOccupant().isFriendly()) {
@@ -352,7 +352,7 @@ public class GameController {
         }
 
         if (banditHideout != null) {
-            if (rand.nextInt(100) < 10) {
+            if (rand.nextInt(100) < h) {
                 TerrainTile spawn = getRandomAdjacentTile(
                         banditHideout.getRow(), banditHideout.getCol());
                 if (spawn.isEmpty()) {
@@ -388,7 +388,7 @@ public class GameController {
             }
             int newRow = tile.getRow() + r;
             int newCol = tile.getCol() + c;
-            if (newRow >= 0 && newRow < 10 && newCol >= 0 && newCol < 10) {
+            if (newRow >= 0 && newRow < h && newCol >= 0 && newCol < v) {
                 //This handles an edge case where a unit can be killed in a
                 //counter attack, and then the ai attempts to move the same unit
                 //Very much an edge case
@@ -405,7 +405,7 @@ public class GameController {
     private static TerrainTile getRandomAdjacentTile(int row, int col) {
         int r = row + rand.nextInt(3) - 1;
         int c = col + rand.nextInt(3) - 1;
-        while (!(r >= 0 && r < 10 && c > 0 && c < 10)) {
+        while (!(r >= 0 && r < h && c > 0 && c < v)) {
             r = row + rand.nextInt(3) - 1;
             c = col + rand.nextInt(3) - 1;
         }

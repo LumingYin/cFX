@@ -6,8 +6,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 /**
  * Represents the map that the game will be played on. All MapObjects for the
@@ -20,6 +18,7 @@ import java.nio.file.Paths;
 public class Map {
 
     private static TerrainTile[][] map;
+    private static int h, v;
 
     /**
      * Public constructor that builds the map. The graphics for Map will degrade
@@ -31,6 +30,8 @@ public class Map {
      */
     public Map(int rows, int columns) {
         // TileType[] types = TileType.values();
+        this.h = rows;
+        this.v = columns;
         map = new TerrainTile[rows][columns];
 
         for (int r = 0; r < map.length; r++) {
@@ -102,44 +103,6 @@ public class Map {
      * @param bandit the enemy Civilization.
      */
     public static void addEnemies(Bandit bandit, int numEnemies) {
-        int h, v;
-        int mapSize = 0;
-        try {
-            String contents = new String(Files.
-                readAllBytes(Paths.get(".ds.tmp")));
-            mapSize = Integer.parseInt(contents);
-            // File ff = new File(".ds.tmp");
-            // boolean result = Files.deleteIfExists(ff.toPath());
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-        switch (mapSize) {
-        case 0:
-            h = 10;
-            v = 10;
-            break;
-        case 1:
-            h = 15;
-            v = 15;
-            break;
-        case 2:
-            h = 20;
-            v = 20;
-            break;
-        case 3:
-            h = 25;
-            v = 25;
-            break;
-        case 4:
-            h = 30;
-            v = 30;
-            break;
-        default:
-            h = 10;
-            v = 10;
-            break;
-        }
-
         for (int i = 0; i < numEnemies; i++) {
             int r = new Random().nextInt(h);
             int c = new Random().nextInt(v);
