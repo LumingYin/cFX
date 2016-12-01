@@ -1,5 +1,6 @@
 package model;
 
+import controller.GameController;
 import javafx.scene.image.Image;
 
 /**
@@ -53,5 +54,11 @@ public class Settlement extends Building {
     public Image getImage() {
         return new Image(
                 "File:./src/main/java/view/Civ_Icon/settlement_icon.PNG");
+    }
+
+    @Override
+    public void demolish() {
+        super.demolish();
+        GameController.getCivilization().decrementNumSettlements();
     }
 }

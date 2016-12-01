@@ -2,6 +2,7 @@ package view;
 
 import controller.GameController;
 import model.Building;
+import model.Settlement;
 import javafx.scene.control.Button;
 
 /**
@@ -38,17 +39,19 @@ public class BuildingMenu extends AbstractMenu {
             });
 
         demolish.setOnAction(event -> {
-                if (GameController.getCivilization().getNumSettlements() <= 1) {
-                    showAlert("Cannot Demolish Building",
-                        "If this building is demolished, "
-                        + "you will have no building left.");
+                if (GameController.getLastClicked().getTile().
+                    getOccupant() instanceof Settlement
+                    && GameController.getCivilization().
+                    getNumSettlements() <= 1) {
+                    showAlert("Cannot Demolish Settlement",
+                        "If this settlement is demolished, "
+                        + "you will have no settlement left.");
                 } else if (GameController.getLastClicked().getTile().
                     getOccupant().getOwner() == GameController.
                         getCivilization()) {
                     ((Building) GameController.getLastClicked().
                         getTile().getOccupant()).demolish();
                     GameController.getLastClicked().getTile().setOccupant(null);
-                    GameController.getCivilization().decrementNumSettlements();
                     GameScreen.getResources().update();
                     playSFX("BuildingMenu_demolish");
                 }
