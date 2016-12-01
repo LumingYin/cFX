@@ -87,6 +87,8 @@ public class GameController {
             if (move(last)) {
                 lastClicked = last;
                 playSFX("MilitaryMenu_move");
+                GameController.updateResourcesBar();
+                GridFX.update();
             } else {
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Unable to move");
@@ -210,6 +212,8 @@ public class GameController {
         }
         if (attacker.getOccupant().getOwner() == playerCivilization) {
             playSFX("MilitaryMenu_attack");
+            GameController.updateResourcesBar();
+            GridFX.update();
         }
 
         ((MilitaryUnit) attacker.getOccupant()).attack(enemy.getOccupant());

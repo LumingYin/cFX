@@ -30,8 +30,6 @@ public class WorkerMenu extends AbstractMenu {
                     getLastClicked().getTile().getType())) {
                     GameController.getLastClicked().
                 getTile().setOccupant(worker.convert());
-                    // GameScreen.getResources().update();
-                    GameController.getCivilization().incrementNumSettlements();
                     playSFX("WorkerMenu_convert");
                     GameController.updateResourcesBar();
                     GridFX.update();

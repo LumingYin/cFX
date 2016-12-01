@@ -201,7 +201,8 @@ public class CivilizationGame extends Application {
         textBox2.setId("select-text");
         textBox2.setTranslateY(-180);
 
-        final ChoiceBox cb = new ChoiceBox(FXCollections.observableArrayList(
+        final ChoiceBox<String> cb = new ChoiceBox<>(FXCollections.
+            observableArrayList(
             "10 × 10 [Beginners' Journey]", "15 × 15 [Kinda Intermediate]",
             "20 × 20 [Pretty Difficult]", "25 × 25 [Very Difficult]",
             "30 × 30 [Quite Advanced]")
@@ -217,7 +218,6 @@ public class CivilizationGame extends Application {
                     mapSize = (int) newValue;
             }
         });
-
 
         startScreen.getChildren().addAll(textBox, startBtn,
             civListBox, textBox2, cb);

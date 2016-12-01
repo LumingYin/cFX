@@ -180,7 +180,7 @@ public class Map {
                      dr++) {
                     for (int dc = current.getCol() - 1;
                          dc <= current.getCol() + 1; dc++) {
-                        if  (dr >= 0 && dr < 10 && dc >= 0 && dc < 10) {
+                        if  (dr >= 0 && dr < h && dc >= 0 && dc < v) {
                             if (!closed.contains(map[dr][dc])) {
                                 queue.add(map[dr][dc]);
                                 closed.add(map[dr][dc]);

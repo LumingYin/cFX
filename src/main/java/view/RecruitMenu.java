@@ -79,7 +79,7 @@ public class RecruitMenu extends AbstractMenu {
     public RecruitMenu() {
         ObservableList<UnitEnum> everyUnit = FXCollections.
             observableArrayList(UnitEnum.values());
-        unitView = new ListView();
+        unitView = new ListView<>();
         // unitView.setMaxSize(200, 100);
         unitView.setItems(everyUnit);
         unitView.getSelectionModel().select(0);
@@ -104,7 +104,7 @@ public class RecruitMenu extends AbstractMenu {
                     break;
                 case SETTLER_UNIT:
                     newUnit = GameController.getCivilization().
-                        getSettlerUnit("Settler Stub");
+                        getSettlerUnit("Settler");
                     break;
                 case FARMERS:
                     newUnit = GameController.getCivilization().getFarmerUnit();

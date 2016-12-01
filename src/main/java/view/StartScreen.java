@@ -43,7 +43,7 @@ public class StartScreen extends StackPane {
 
         ObservableList<CivEnum> enumToUIList = FXCollections.
             observableArrayList(CivEnum.values());
-        civList = new ListView();
+        civList = new ListView<>();
         civList.setMaxSize(300, 230);
         civList.setItems(enumToUIList);
         civList.setId("city-list");

@@ -16,6 +16,7 @@ import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 public class GameScreen extends BorderPane {
     private GridFX grid;
     private Map map;
+    private ScrollPane scrollPane;
     private static AbstractMenu statusMenu;
     private static ResourcesMenu resourcesMenu;
     private static VBox vbox;
@@ -32,7 +33,7 @@ public class GameScreen extends BorderPane {
         resourcesMenu = new ResourcesMenu();
         statusMenu = new StatusMenu();
 
-        ScrollPane scrollPane = new ScrollPane();
+        scrollPane = new ScrollPane();
         scrollPane.setContent(grid);
         scrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
         scrollPane.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);

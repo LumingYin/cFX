@@ -53,6 +53,7 @@ public class BuildingMenu extends AbstractMenu {
                     playSFX("BuildingMenu_demolish");
                 }
                 GridFX.update();
+                GameScreen.switchMenu(GameController.GameState.NEUTRAL);
                 GameController.setLastClicked(GameController.getLastClicked());
             });
 
