@@ -27,6 +27,8 @@ import javafx.collections.FXCollections;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import java.util.Optional;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 /**
  * Created by Tian-Yo Yang on 11/11/2016.
@@ -52,7 +54,6 @@ public class CivilizationGame extends Application {
         stage.setMinWidth(1280.0);
         stage.setMaxHeight(720.0);
         stage.setMaxWidth(1280.0);
-        // stage.initStyle(StageStyle.TRANSPARENT);
         Scene x = startGame();
         stage.setScene(x);
         x.getStylesheets().add(CivilizationGame.class.
@@ -90,7 +91,6 @@ public class CivilizationGame extends Application {
         textBox.setFill(Color.WHITE);
         textBox.setId("select-text");
         textBox.setTranslateY(-470);
-
         TextInputDialog popup = new TextInputDialog();
         startBtn.setOnAction(event -> {
                 popup.setTitle("A new Settlement");
@@ -147,34 +147,29 @@ public class CivilizationGame extends Application {
                     case 0:
                         GridFX.getMap().putSettlement(townName.get(),
                             GameController.getCivilization(), 0, 9);
-                        GridFX.getMap().addEnemies(bandit, 1);
                         break;
                     case 1:
                         GridFX.getMap().putSettlement(townName.get(),
                             GameController.getCivilization(), 0, 14);
-                        GridFX.getMap().addEnemies(bandit, 2);
                         break;
                     case 2:
                         GridFX.getMap().putSettlement(townName.get(),
                             GameController.getCivilization(), 0, 19);
-                        GridFX.getMap().addEnemies(bandit, 3);
                         break;
                     case 3:
                         GridFX.getMap().putSettlement(townName.get(),
                             GameController.getCivilization(), 0, 24);
-                        GridFX.getMap().addEnemies(bandit, 4);
                         break;
                     case 4:
                         GridFX.getMap().putSettlement(townName.get(),
                             GameController.getCivilization(), 0, 29);
-                        GridFX.getMap().addEnemies(bandit, 5);
                         break;
                     default:
                         GridFX.getMap().putSettlement(townName.get(),
                             GameController.getCivilization(), 0, 9);
-                        GridFX.getMap().addEnemies(bandit, 1);
                         break;
                     }
+                    GridFX.getMap().addEnemies(bandit, mapSize + 1);
                     GridFX.update();
                     gameScreen = new GameScreen();
                     scene2 = new Scene(gameScreen);
@@ -185,15 +180,29 @@ public class CivilizationGame extends Application {
                     stage.setMaxHeight(810.0);
                     stage.setMinWidth(880.0);
                     stage.setMaxWidth(880.0);
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("Welcome");
+                    alert.setHeaderText("Welcome to Your Civilization");
+                    String tipsText = "Your civilization's settlement is on the"
+                        + " top right corner of the map. Your enemy's settlemen"
+                        + "t is on the bottom left corner of the map.";
+                    if (mapSize == 1 || mapSize == 2
+                        || mapSize == 3 || mapSize == 4) {
+                        tipsText = tipsText + "\n\nTo explore the map, pan"
+                            + " around by dragging and moving the scroll bars"
+                            + " on each side.\n\nIf they are not immediately"
+                            + " visible, you may need to scroll a bit to the"
+                            + " top right or bottom left corner to get there.";
+                    }
+                    alert.setContentText(tipsText);
+                    alert.showAndWait();
                 }
             });
-
         Text textBox2 = new Text();
         textBox2.setText("Select your map's size");
         textBox2.setFill(Color.WHITE);
         textBox2.setId("select-text");
         textBox2.setTranslateY(-180);
-
         final ChoiceBox<String> cb = new ChoiceBox<>(FXCollections.
             observableArrayList(
             "10 × 10 [Beginners' Journey]", "15 × 15 [Kinda Intermediate]",
@@ -203,7 +212,6 @@ public class CivilizationGame extends Application {
         cb.setValue("10 × 10 [Beginners' Journey]");
         cb.setTranslateY(-145);
         cb.setId("map-size");
-
         cb.getSelectionModel().selectedIndexProperty().addListener(new
             ChangeListener<Number>() {
                 public void changed(ObservableValue ov,
@@ -211,7 +219,6 @@ public class CivilizationGame extends Application {
                     mapSize = (int) newValue;
             }
         });
-
         startScreen.getChildren().addAll(textBox, startBtn,
             civListBox, textBox2, cb);
         startScreen.setAlignment(Pos.BOTTOM_CENTER);
