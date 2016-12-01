@@ -93,8 +93,9 @@ public class GameController {
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Unable to move");
                 alert.setHeaderText("Unable to move the tile");
-                alert.setContentText("You can only move to a "
-                    + "nearby tile that is not the origonal tile.");
+                alert.setContentText("You can only move to a"
+                    + " nearby tile that is not the origonal tile when you"
+                    + " haven't used up your moving quote in this turn.");
                 alert.showAndWait();
             }
         }
@@ -206,7 +207,13 @@ public class GameController {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Attack failed");
             alert.setHeaderText("Unable to attack");
-            alert.setContentText("Attack failed.");
+            String s = "You can only attack a nearby enemy's unit.";
+            if (!((MilitaryUnit) attacker.getOccupant()).getCanAttack()) {
+                s = s + "\n\nYour unit is not eligible for attack. After ending"
+                    + " this turn and starting a new turn, your unit may be"
+                    + " eligible for attack.";
+            }
+            alert.setContentText(s);
             alert.showAndWait();
             return;
         }
