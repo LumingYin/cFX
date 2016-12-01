@@ -32,7 +32,6 @@ public class GameScreen extends BorderPane {
         map = GridFX.getMap();
         resourcesMenu = new ResourcesMenu();
         statusMenu = new StatusMenu();
-
         scrollPane = new ScrollPane();
         scrollPane.setContent(grid);
         scrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);

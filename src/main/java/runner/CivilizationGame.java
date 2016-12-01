@@ -122,9 +122,6 @@ public class CivilizationGame extends Application {
                     default:
                         break;
                     }
-                    // try {
-                    //     PrintWriter writer = new PrintWriter(".ds.tmp",
-                    //         "UTF-8");
                     switch (mapSize) {
                     case 0:
                         GameController.setRowColumn(10, 10);
@@ -145,10 +142,6 @@ public class CivilizationGame extends Application {
                         GameController.setRowColumn(10, 10);
                         break;
                     }
-                    //     writer.close();
-                    // } catch (Throwable e) {
-                    //     e.printStackTrace();
-                    // }
                     GridFX.update();
                     switch (mapSize) {
                     case 0:
