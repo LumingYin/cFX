@@ -1,1 +1,3 @@
-# civilization_fall16
+# CivilizationFX
+
+Implementing a simplified version of the Civilization game with JavaFX.
