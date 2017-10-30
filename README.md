@@ -1,3 +1,3 @@
-# CivilizationFX
+# cFX
 
-Implementing a simplified version of the Civilization game with JavaFX.
+Implementing a simple 2D game in JavaFX.
